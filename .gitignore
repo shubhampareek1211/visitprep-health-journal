@@ -14,6 +14,10 @@ playwright-report/
 test-results/
 *.tsbuildinfo
 
-# Do not publish markdown (internal docs / agent files)
+# Do not publish markdown (internal docs / agent files) — except the root public README
 *.md
 *.MD
+!/README.md
+
+# Local editor / agent config — do not publish
+.claude/
