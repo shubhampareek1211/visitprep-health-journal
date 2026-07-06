@@ -1,0 +1,31 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Voice — Do & Don't" subtitle="Clinical, hedged, provenance-first · no emoji" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 22px; background: var(--surface); display:grid; grid-template-columns:1fr 1fr; gap: 14px; }
+  .col h4 { font-size: 11px; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; margin-bottom: 10px; }
+  .do h4 { color: var(--accent-text); }
+  .dont h4 { color: var(--danger-text); }
+  .item { font-size: 13px; line-height: 1.45; color: var(--text-body); padding: 8px 11px; border-radius: var(--radius-md); margin-bottom: 8px; }
+  .do .item { background: var(--accent-tint); }
+  .dont .item { background: var(--danger-tint); }
+</style>
+</head>
+<body>
+  <div class="col do">
+    <h4>Do</h4>
+    <div class="item">"Nausea reported on 6 of 30 days, clustered within 48 h of injection."</div>
+    <div class="item">"Local deterministic extraction — no model inference, no network calls."</div>
+    <div class="item">"For discussion with your clinician."</div>
+  </div>
+  <div class="col dont">
+    <h4>Don't</h4>
+    <div class="item">"We found that your nausea is caused by your meds!"</div>
+    <div class="item">"AI-powered insights to optimize your health journey."</div>
+    <div class="item">"You should increase your dose. 💊"</div>
+  </div>
+</body>
+</html>

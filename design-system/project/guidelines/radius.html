@@ -1,0 +1,26 @@
+<!-- @dsCard group="Spacing" viewport="700x150" name="Radius" subtitle="8px max — restrained, never pill-everything" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 22px; background: var(--surface); }
+  .row { display:flex; gap: 22px; align-items:flex-end; }
+  .item { text-align:center; }
+  .box { width: 78px; height: 60px; background: var(--surface-accent); border: 1px solid var(--border-accent); }
+  .v { font-size: 11px; color: var(--text-strong); font-weight:600; margin-top:9px; }
+  .t { font-family: var(--font-mono); font-size: 9.5px; color: var(--text-muted); }
+  .pillbox { width: 78px; height: 32px; border-radius: var(--radius-pill); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:var(--radius-xs)"></div><div class="v">3px</div><div class="t">radius-xs</div></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-sm)"></div><div class="v">5px</div><div class="t">radius-sm</div></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-md)"></div><div class="v">6px</div><div class="t">radius-md</div></div>
+    <div class="item"><div class="box" style="border-radius:var(--radius-lg)"></div><div class="v">8px</div><div class="t">radius-lg</div></div>
+    <div class="item"><div class="box pillbox" style="background:var(--surface-accent);border:1px solid var(--border-accent)"></div><div class="v">pill</div><div class="t">radius-pill</div></div>
+  </div>
+</body>
+</html>

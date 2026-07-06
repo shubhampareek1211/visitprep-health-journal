@@ -1,0 +1,51 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Clinical — Symptom, Evidence, Safety" subtitle="SymptomChip · EvidenceCard · SafetyNote" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--canvas); }
+  .lbl { font-size: 10px; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin: 0 0 9px; }
+  .block { margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { SymptomChip, EvidenceCard, SafetyNote } = window.VisitPrepDesignSystem_2c5c4e;
+  function Demo() {
+    const [sel, setSel] = React.useState("nausea");
+    React.useEffect(() => { lucide.createIcons(); });
+    return (
+      <div>
+        <div className="block">
+          <div className="lbl">Extracted symptom signals</div>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+            <SymptomChip label="nausea" level="moderate" count={6} injectionAdjacent selected={sel==='nausea'} onClick={()=>setSel('nausea')} />
+            <SymptomChip label="fatigue" level="mild" count={4} selected={sel==='fatigue'} onClick={()=>setSel('fatigue')} />
+            <SymptomChip label="low appetite" level="moderate" count={5} injectionAdjacent selected={sel==='low appetite'} onClick={()=>setSel('low appetite')} />
+            <SymptomChip label="poor sleep" level="mild" count={3} selected={sel==='poor sleep'} onClick={()=>setSel('poor sleep')} />
+            <SymptomChip label="vomiting" level="severe" count={1} selected={sel==='vomiting'} onClick={()=>setSel('vomiting')} />
+          </div>
+        </div>
+        <div className="block">
+          <div className="lbl">Selected source evidence</div>
+          <EvidenceCard signal="nausea" level="moderate" date="2026-06-12"
+            snippet="Felt nauseous this morning, ate very little before the injection."
+            match="nauseous" injectionAdjacent />
+        </div>
+        <SafetyNote />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(() => lucide.createIcons(), 60);
+</script>
+</body>
+</html>

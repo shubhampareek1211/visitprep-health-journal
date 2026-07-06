@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x130" name="Data-viz Series" subtitle="Muted clinical palette — never categorical rainbow" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--surface); }
+  .row { display: flex; gap: 10px; }
+  .sw { flex: 1; text-align:center; }
+  .chip { height: 44px; border-radius: var(--radius-md); }
+  .name { font-size: 11px; color: var(--text-strong); font-weight: 600; margin-top: 7px; }
+  .hex { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--viz-teal)"></div><div class="name">teal</div><div class="hex">#128a78</div></div>
+    <div class="sw"><div class="chip" style="background:var(--viz-slate)"></div><div class="name">slate</div><div class="hex">#5a7480</div></div>
+    <div class="sw"><div class="chip" style="background:var(--viz-amber)"></div><div class="name">amber</div><div class="hex">#c07d11</div></div>
+    <div class="sw"><div class="chip" style="background:var(--viz-sand)"></div><div class="name">sand</div><div class="hex">#b08a5a</div></div>
+    <div class="sw"><div class="chip" style="background:var(--viz-clay)"></div><div class="name">clay</div><div class="hex">#b5675a</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Mono — IDs & Data" subtitle="IBM Plex Mono for synthetic IDs, codes, tabular data" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 22px; background: var(--surface); display:flex; flex-direction:column; gap:12px; }
+  .m { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .ids { display:flex; gap: 10px; flex-wrap:wrap; }
+  .pill { font-family: var(--font-mono); font-size: 12px; background: var(--surface-sunken); border:1px solid var(--border-default); border-radius: var(--radius-sm); padding: 4px 9px; color: var(--text-body); }
+  .grid { display:flex; gap: 34px; }
+  .cell .v { font-family: var(--font-mono); font-size: 22px; font-weight:500; color: var(--text-strong); font-variant-numeric: tabular-nums; }
+  .cell .l { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="ids">
+    <span class="pill">PT-0413</span>
+    <span class="pill">SIG-NAUSEA</span>
+    <span class="pill">2026-06-12</span>
+    <span class="pill">DOSE 0.5 → 1.0 mg</span>
+  </div>
+  <div class="grid">
+    <div class="cell"><div class="v">62 bpm</div><div class="l">Resting HR</div></div>
+    <div class="cell"><div class="v">7.1 h</div><div class="l">Sleep avg</div></div>
+    <div class="cell"><div class="v">6 / 30</div><div class="l">Moderate days</div></div>
+    <div class="cell"><div class="v">−3.4 lb</div><div class="l">Weight change</div></div>
+  </div>
+</body>
+</html>

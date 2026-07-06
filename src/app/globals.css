@@ -1,0 +1,238 @@
+/* VisitPrep Health Journal — app stylesheet.
+   Design tokens ported from the "VisitPrep Design System" project
+   (calm clinical SaaS: cool gray neutrals, restrained teal accent, amber
+   caution, red for severe/safety only). Public Sans + IBM Plex Mono are wired
+   through next/font in layout.tsx as --font-sans / --font-mono. */
+
+:root {
+  /* ── Neutral (cool gray) ramp ── */
+  --gray-0:   #ffffff;
+  --gray-25:  #fafbfb;
+  --gray-50:  #f5f7f7;
+  --gray-100: #eef1f2;
+  --gray-150: #e6eaeb;
+  --gray-200: #dce1e3;
+  --gray-300: #c3cbcf;
+  --gray-400: #98a3a9;
+  --gray-500: #6a757c;
+  --gray-600: #4c565c;
+  --gray-700: #353d42;
+  --gray-800: #232a2e;
+  --gray-900: #151a1d;
+
+  /* ── Teal-emerald (primary accent) ── */
+  --teal-50:  #e9f6f3;
+  --teal-100: #cdeae3;
+  --teal-200: #9fd7cb;
+  --teal-300: #63bdac;
+  --teal-400: #2ba08c;
+  --teal-500: #128a78;
+  --teal-600: #0e7466;
+  --teal-700: #0b5b50;
+  --teal-800: #0a4942;
+
+  /* ── Amber (caution) ── */
+  --amber-50:  #fdf4e4;
+  --amber-100: #f8e4bf;
+  --amber-300: #e6b24f;
+  --amber-400: #e6b24f;
+  --amber-500: #c07d11;
+  --amber-600: #a2670a;
+  --amber-700: #7e4f07;
+
+  /* ── Red (severe / safety only) ── */
+  --red-50:  #fbece9;
+  --red-100: #f5d4cf;
+  --red-300: #e59389;
+  --red-400: #e59389;
+  --red-500: #c93a2c;
+  --red-600: #ad2c20;
+  --red-700: #88211a;
+
+  /* ── Surfaces ── */
+  --canvas:          var(--gray-50);
+  --surface:         var(--gray-0);
+  --surface-sunken:  var(--gray-100);
+  --surface-raised:  var(--gray-0);
+  --surface-accent:  var(--teal-50);
+
+  /* ── Borders ── */
+  --border-subtle:  var(--gray-150);
+  --border-default: var(--gray-200);
+  --border-strong:  var(--gray-300);
+  --border-accent:  var(--teal-200);
+
+  /* ── Text ── */
+  --text-strong:    var(--gray-900);
+  --text-body:      var(--gray-700);
+  --text-muted:     var(--gray-500);
+  --text-subtle:    var(--gray-400);
+  --text-on-accent: var(--gray-0);
+  --text-link:      var(--teal-600);
+
+  /* ── Accent (interactive primary) ── */
+  --accent:         var(--teal-600);
+  --accent-hover:   var(--teal-700);
+  --accent-pressed: var(--teal-800);
+  --accent-tint:    var(--teal-50);
+  --accent-tint-2:  var(--teal-100);
+  --accent-text:    var(--teal-700);
+
+  /* ── Caution (amber) ── */
+  --caution:        var(--amber-600);
+  --caution-tint:   var(--amber-50);
+  --caution-border: var(--amber-100);
+  --caution-text:   var(--amber-700);
+
+  /* ── Danger / safety (red) ── */
+  --danger:         var(--red-600);
+  --danger-tint:    var(--red-50);
+  --danger-border:  var(--red-100);
+  --danger-text:    var(--red-700);
+
+  /* ── Positive (uses teal family to stay calm) ── */
+  --positive:       var(--teal-600);
+  --positive-tint:  var(--teal-50);
+
+  /* ── Focus ── */
+  --focus-ring:     color-mix(in srgb, var(--teal-500) 55%, transparent);
+
+  /* ── Data-viz series (muted, clinical) ── */
+  --viz-teal:   #128a78;
+  --viz-slate:  #5a7480;
+  --viz-amber:  #c07d11;
+  --viz-sand:   #b08a5a;
+  --viz-clay:   #b5675a;
+  --viz-grid:   #e6eaeb;
+  --viz-axis:   #98a3a9;
+
+  /* ── Type ── */
+  --font-sans-fallback: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono-fallback: ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-display: 30px;
+  --text-h1:      24px;
+  --text-h2:      19px;
+  --text-h3:      16px;
+  --text-body-lg: 15px;
+  --text-base:    14px;
+  --text-sm:      13px;
+  --text-xs:      12px;
+  --text-2xs:     11px;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  --leading-tight:   1.2;
+  --leading-snug:    1.35;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  --tracking-tight:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-eyebrow: 0.07em;
+
+  /* ── Spacing / radius / sizing ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-xs:  3px;
+  --radius-sm:  5px;
+  --radius-md:  6px;
+  --radius-lg:  8px;
+  --radius-pill: 999px;
+
+  --sidebar-width: 232px;
+  --rail-width:    300px;
+  --content-max:   1080px;
+  --topbar-height: 56px;
+
+  --control-h-sm: 28px;
+  --control-h-md: 34px;
+  --control-h-lg: 40px;
+  --border-width: 1px;
+
+  /* ── Elevation ── */
+  --shadow-xs: 0 1px 1px rgba(21, 26, 29, 0.04);
+  --shadow-sm: 0 1px 2px rgba(21, 26, 29, 0.06), 0 1px 1px rgba(21, 26, 29, 0.04);
+  --shadow-md: 0 2px 6px rgba(21, 26, 29, 0.07), 0 1px 2px rgba(21, 26, 29, 0.05);
+  --shadow-lg: 0 8px 24px rgba(21, 26, 29, 0.10), 0 2px 6px rgba(21, 26, 29, 0.06);
+  --shadow-xl: 0 16px 40px rgba(21, 26, 29, 0.14), 0 4px 10px rgba(21, 26, 29, 0.07);
+
+  --ring-focus: 0 0 0 3px var(--focus-ring);
+  --ring-inset-border: inset 0 0 0 1px var(--border-default);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 260ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "tnum" 1, "cv05" 1;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans, var(--font-sans-fallback));
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--text-strong);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+p { margin: 0; }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { font-family: inherit; }
+
+.tnum { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--font-mono, var(--font-mono-fallback)); }
+
+::selection { background: var(--teal-100); color: var(--teal-800); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--radius-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* Print: hide app chrome and let the active screen (the Doctor Report) flow
+   onto the page. Used by the report's "Print" button (window.print()). */
+@media print {
+  [data-vp-chrome] { display: none !important; }
+  html, body { background: #fff !important; }
+  [data-vp-shell] { display: block !important; height: auto !important; overflow: visible !important; }
+  [data-vp-scroll] { overflow: visible !important; height: auto !important; }
+  [data-vp-scroll] > div { max-width: none !important; padding: 0 !important; }
+  @page { margin: 14mm; }
+}

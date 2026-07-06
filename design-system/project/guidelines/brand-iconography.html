@@ -1,0 +1,40 @@
+<!-- @dsCard group="Brand" viewport="700x170" name="Iconography — Lucide" subtitle="1.5–2px stroke, outline, currentColor · no emoji" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--surface); }
+  .grid { display:grid; grid-template-columns: repeat(8, 1fr); gap: 14px 8px; }
+  .cell { display:flex; flex-direction:column; align-items:center; gap:6px; color: var(--text-body); }
+  .cell svg { width: 20px; height: 20px; stroke-width: 1.75; }
+  .lbl { font-size: 9.5px; color: var(--text-muted); }
+  .accent { color: var(--accent); }
+  .caution { color: var(--caution); }
+  .danger { color: var(--danger); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell accent"><i data-lucide="layout-dashboard"></i><span class="lbl">overview</span></div>
+    <div class="cell"><i data-lucide="users"></i><span class="lbl">patients</span></div>
+    <div class="cell"><i data-lucide="notebook-pen"></i><span class="lbl">journal</span></div>
+    <div class="cell"><i data-lucide="search-check"></i><span class="lbl">evidence</span></div>
+    <div class="cell"><i data-lucide="line-chart"></i><span class="lbl">analytics</span></div>
+    <div class="cell"><i data-lucide="file-text"></i><span class="lbl">report</span></div>
+    <div class="cell"><i data-lucide="syringe"></i><span class="lbl">injection</span></div>
+    <div class="cell"><i data-lucide="heart-pulse"></i><span class="lbl">vitals</span></div>
+    <div class="cell"><i data-lucide="moon"></i><span class="lbl">sleep</span></div>
+    <div class="cell"><i data-lucide="footprints"></i><span class="lbl">steps</span></div>
+    <div class="cell"><i data-lucide="weight"></i><span class="lbl">weight</span></div>
+    <div class="cell"><i data-lucide="activity"></i><span class="lbl">activity</span></div>
+    <div class="cell caution"><i data-lucide="alert-triangle"></i><span class="lbl">caution</span></div>
+    <div class="cell danger"><i data-lucide="shield-alert"></i><span class="lbl">safety</span></div>
+    <div class="cell"><i data-lucide="quote"></i><span class="lbl">snippet</span></div>
+    <div class="cell"><i data-lucide="circle-check"></i><span class="lbl">ready</span></div>
+  </div>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

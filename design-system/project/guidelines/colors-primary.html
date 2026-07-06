@@ -1,0 +1,28 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Primary — Teal/Emerald" subtitle="Accent ramp; --teal-600 is the interactive primary" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--surface); }
+  .row { display: flex; gap: 10px; }
+  .sw { flex: 1; }
+  .chip { height: 52px; border-radius: var(--radius-md); border: 1px solid rgba(21,26,29,.06); }
+  .name { font-size: 11px; color: var(--text-strong); font-weight: 600; margin-top: 7px; }
+  .hex { font-family: var(--font-mono); font-size: 10.5px; color: var(--text-muted); }
+  .star { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--teal-50)"></div><div class="name">50</div><div class="hex">#e9f6f3</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-100)"></div><div class="name">100</div><div class="hex">#cdeae3</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-300)"></div><div class="name">300</div><div class="hex">#63bdac</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-500)"></div><div class="name">500</div><div class="hex">#128a78</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-600)"></div><div class="name">600 <span class="star">●</span></div><div class="hex">#0e7466</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-700)"></div><div class="name">700</div><div class="hex">#0b5b50</div></div>
+    <div class="sw"><div class="chip" style="background:var(--teal-800)"></div><div class="name">800</div><div class="hex">#0a4942</div></div>
+  </div>
+</body>
+</html>

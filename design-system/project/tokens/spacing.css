@@ -1,0 +1,36 @@
+/* ── Spacing, radius, sizing tokens ───────────────────────────────────────
+   4px base grid. Compact density suited to a clinical workspace. */
+
+:root {
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius — 8px max, per spec. Restrained. */
+  --radius-xs:  3px;
+  --radius-sm:  5px;
+  --radius-md:  6px;
+  --radius-lg:  8px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --sidebar-width: 232px;
+  --rail-width:    300px;
+  --content-max:   1080px;
+  --topbar-height: 56px;
+
+  /* Control sizing */
+  --control-h-sm: 28px;
+  --control-h-md: 34px;
+  --control-h-lg: 40px;
+
+  --border-width: 1px;
+}

@@ -1,0 +1,31 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Surfaces & Borders" subtitle="Flat washes; borders do the separating" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--canvas); }
+  .row { display: flex; gap: 12px; }
+  .tile { flex:1; height: 84px; border-radius: var(--radius-lg); display:flex; flex-direction:column; justify-content:flex-end; padding: 10px; }
+  .t-name { font-size: 11px; font-weight: 600; color: var(--text-strong); }
+  .t-tok { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+  .bd-row { display:flex; gap: 12px; margin-top: 12px; }
+  .bd { flex:1; height: 28px; border-radius: var(--radius-sm); background: var(--surface); display:flex; align-items:center; padding-left:10px; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="tile" style="background:var(--canvas);border:1px solid var(--border-default)"><div class="t-name">canvas</div><div class="t-tok">--canvas</div></div>
+    <div class="tile" style="background:var(--surface);border:1px solid var(--border-default)"><div class="t-name">surface</div><div class="t-tok">--surface</div></div>
+    <div class="tile" style="background:var(--surface-sunken)"><div class="t-name">sunken</div><div class="t-tok">--surface-sunken</div></div>
+    <div class="tile" style="background:var(--surface-accent)"><div class="t-name">accent</div><div class="t-tok">--surface-accent</div></div>
+  </div>
+  <div class="bd-row">
+    <div class="bd" style="border:1px solid var(--border-subtle)">--border-subtle</div>
+    <div class="bd" style="border:1px solid var(--border-default)">--border-default</div>
+    <div class="bd" style="border:1px solid var(--border-strong)">--border-strong</div>
+    <div class="bd" style="border:1px solid var(--border-accent)">--border-accent</div>
+  </div>
+</body>
+</html>

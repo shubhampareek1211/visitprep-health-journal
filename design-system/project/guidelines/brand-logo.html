@@ -1,0 +1,23 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Logo & Mark" subtitle="Wordmark, mark, and clear-space" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 0; background: var(--surface); display:flex; }
+  .pane { flex:1; display:flex; align-items:center; justify-content:center; padding: 26px; }
+  .pane + .pane { border-left: 1px solid var(--border-subtle); }
+  .dark { background: var(--gray-900); }
+  .cap { position:absolute; bottom:10px; left:0; right:0; text-align:center; font-size:10px; color:var(--text-muted); }
+  .wrap { position:relative; flex:1; }
+</style>
+</head>
+<body>
+  <div class="wrap" style="display:flex">
+    <div class="pane"><img src="../assets/logo.svg" alt="VisitPrep wordmark" height="34"></div>
+    <div class="pane"><img src="../assets/mark.svg" alt="VisitPrep mark" height="46"></div>
+    <div class="pane dark"><img src="../assets/mark.svg" alt="VisitPrep mark on dark" height="46"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Forms — Input, Select, Textarea, Toggle" subtitle="Journal composer and clinical inputs" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--canvas); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Input, Select, Textarea, Toggle } = window.VisitPrepDesignSystem_2c5c4e;
+  function Demo() {
+    const [note, setNote] = React.useState("Felt nauseous this morning, ate very little. Slept poorly.");
+    const [inj, setInj] = React.useState(true);
+    React.useEffect(() => { lucide.createIcons(); });
+    return (
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,alignItems:'start'}}>
+        <div style={{display:'flex',flexDirection:'column',gap:14}}>
+          <Input label="Search patients" icon="search" placeholder="Name or synthetic ID" />
+          <Select label="Review window" options={["Last 30 days","Last 60 days","Last 90 days"]} />
+          <Toggle label="Injection day" description="Mark if a dose was taken" checked={inj} onChange={setInj} />
+        </div>
+        <Textarea label="Today's note" rows={5} maxLength={600} value={note}
+          onChange={e => setNote(e.target.value)}
+          hint="Patient-reported notes are the source for extraction." />
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(() => lucide.createIcons(), 60);
+</script>
+</body>
+</html>

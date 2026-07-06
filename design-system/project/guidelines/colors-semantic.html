@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x172" name="Semantic — Caution & Safety" subtitle="Amber = caution · Red = severe/safety only" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--surface); display:flex; flex-direction:column; gap:12px; }
+  .grp { }
+  .glabel { font-size: 10px; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 7px; }
+  .row { display: flex; gap: 8px; }
+  .pair { display:flex; align-items:center; gap:8px; padding:6px 10px 6px 6px; border:1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface); }
+  .dot { width: 30px; height: 30px; border-radius: var(--radius-sm); }
+  .pn { font-size: 11px; font-weight:600; color: var(--text-strong); }
+  .ph { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+  <div class="grp">
+    <div class="glabel">Caution — amber</div>
+    <div class="row">
+      <div class="pair"><div class="dot" style="background:var(--amber-50)"></div><div><div class="pn">tint</div><div class="ph">#fdf4e4</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--amber-500)"></div><div><div class="pn">500</div><div class="ph">#c07d11</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--amber-600)"></div><div><div class="pn">600 ●</div><div class="ph">#a2670a</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--amber-700)"></div><div><div class="pn">text</div><div class="ph">#7e4f07</div></div></div>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="glabel">Severe / safety — red (used sparingly)</div>
+    <div class="row">
+      <div class="pair"><div class="dot" style="background:var(--red-50)"></div><div><div class="pn">tint</div><div class="ph">#fbece9</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--red-500)"></div><div><div class="pn">500</div><div class="ph">#c93a2c</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--red-600)"></div><div><div class="pn">600 ●</div><div class="ph">#ad2c20</div></div></div>
+      <div class="pair"><div class="dot" style="background:var(--red-700)"></div><div><div class="pn">text</div><div class="ph">#88211a</div></div></div>
+    </div>
+  </div>
+</body>
+</html>

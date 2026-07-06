@@ -1,0 +1,31 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Weights & Eyebrow" subtitle="Sentence case UI · tracked uppercase eyebrows only" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 22px; background: var(--surface); display:flex; flex-direction:column; gap:14px; }
+  .weights { display:flex; gap: 26px; align-items:baseline; }
+  .w { font-size: 20px; color: var(--text-strong); }
+  .wl { font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); display:block; margin-top:4px; }
+  .eyebrow { font-size: 11px; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+  .eyebrow.accent { color: var(--accent-text); }
+  .eyebrow.danger { color: var(--danger-text); }
+  .erow { display:flex; gap: 28px; align-items:center; }
+</style>
+</head>
+<body>
+  <div class="weights">
+    <div><span class="w" style="font-weight:400">Regular</span><span class="wl">400</span></div>
+    <div><span class="w" style="font-weight:500">Medium</span><span class="wl">500</span></div>
+    <div><span class="w" style="font-weight:600">Semibold</span><span class="wl">600</span></div>
+    <div><span class="w" style="font-weight:700">Bold</span><span class="wl">700</span></div>
+  </div>
+  <div class="erow">
+    <span class="eyebrow">SOURCE EVIDENCE</span>
+    <span class="eyebrow accent">REPORT READINESS</span>
+    <span class="eyebrow danger">SAFETY BOUNDARY</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* ── Base / reset ─────────────────────────────────────────────────────────
+   Minimal normalization + brand defaults. Applied wherever styles.css is
+   linked. Scoped lightly so specimen cards and UI kits inherit the brand. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "tnum" 1, "cv05" 1;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 { margin: 0; color: var(--text-strong); font-weight: var(--weight-semibold); line-height: var(--leading-tight); }
+p { margin: 0; }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { font-family: inherit; }
+
+/* Tabular numbers utility for data-dense readouts */
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Mono utility for synthetic IDs / codes */
+.mono { font-family: var(--font-mono); }
+
+::selection { background: var(--teal-100); color: var(--teal-800); }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--radius-xs);
+}

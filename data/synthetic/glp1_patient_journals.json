@@ -1,0 +1,3715 @@
+{
+  "metadata": {
+    "datasetName": "Synthetic GLP-1 Patient Journal Dataset",
+    "version": "0.1.0",
+    "generatedOn": "2026-06-26",
+    "syntheticDataNotice": "All patients, notes, annotations, and wearable metrics are fictional and generated for MVP prototyping. Do not use for clinical care.",
+    "clinicalBasis": [
+      "GLP-1 receptor agonist literature commonly reports gastrointestinal adverse events including nausea, vomiting, diarrhea, and constipation.",
+      "Additional commonly discussed symptoms include appetite loss, abdominal discomfort, dizziness, headache, fatigue, and possible heart-rate changes.",
+      "The dataset is designed for NLP, summarization, and visualization testing, not clinical inference."
+    ],
+    "sourceReferences": [
+      {
+        "title": "Clinical Recommendations to Manage Gastrointestinal Adverse Events in Patients Treated With GLP-1 Receptor Agonists",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9821052/"
+      },
+      {
+        "title": "Gastrointestinal tolerability of once-weekly semaglutide 2.4 mg in adults with overweight or obesity",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9293236/"
+      },
+      {
+        "title": "Semaglutide - StatPearls",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK603723/"
+      }
+    ]
+  },
+  "patients": [
+    {
+      "id": "syn-p001",
+      "displayName": "Patient A",
+      "syntheticPatientProfile": {
+        "ageRange": "30-39",
+        "context": "New GLP-1 start, weekly injection on Mondays, trying to keep strength training consistent.",
+        "dataType": "synthetic fictional patient-generated health journal"
+      },
+      "journalEntries": [
+        {
+          "day": 1,
+          "date": "2026-05-01",
+          "rawJournalNote": "2026-05-01 6:45am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 214.6,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6620,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 2,
+          "date": "2026-05-02",
+          "rawJournalNote": "2026-05-02 8:05pm - day after/near shot. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 214.4,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6800,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 3,
+          "date": "2026-05-03",
+          "rawJournalNote": "2026-05-03 11:30am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 214.2,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 4,
+          "date": "2026-05-04",
+          "rawJournalNote": "2026-05-04 7:20am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 214.1,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 5,
+          "date": "2026-05-05",
+          "rawJournalNote": "2026-05-05 9:10pm - constipated, uncomfortable and slow. bloated after small meal. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 213.9,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 6,
+          "date": "2026-05-06",
+          "rawJournalNote": "2026-05-06 2:35pm - constipated, uncomfortable and slow. bloated after small meal. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 213.7,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6620,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 7,
+          "date": "2026-05-07",
+          "rawJournalNote": "2026-05-07 6:45am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 213.5,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6800,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 8,
+          "date": "2026-05-08",
+          "rawJournalNote": "2026-05-08 8:05pm - shot day. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. sipped water slowly.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 213.3,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 9,
+          "date": "2026-05-09",
+          "rawJournalNote": "2026-05-09 11:30am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 213.2,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 10,
+          "date": "2026-05-10",
+          "rawJournalNote": "2026-05-10 7:20am - day after/near shot. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 213.0,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 11,
+          "date": "2026-05-11",
+          "rawJournalNote": "2026-05-11 9:10pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 212.8,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6620,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 12,
+          "date": "2026-05-12",
+          "rawJournalNote": "2026-05-12 2:35pm - constipated, uncomfortable and slow. bloated after small meal. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 212.6,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6800,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 13,
+          "date": "2026-05-13",
+          "rawJournalNote": "2026-05-13 6:45am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 212.4,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 14,
+          "date": "2026-05-14",
+          "rawJournalNote": "2026-05-14 8:05pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 212.3,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 15,
+          "date": "2026-05-15",
+          "rawJournalNote": "2026-05-15 11:30am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": true,
+          "doseChangeDay": true,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 212.1,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 16,
+          "date": "2026-05-16",
+          "rawJournalNote": "2026-05-16 7:20am - day after/near shot. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. not awful but enough that I want to mention it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 211.9,
+            "restingHeartRate": 74,
+            "sleepHours": 6.5,
+            "steps": 6020,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 17,
+          "date": "2026-05-17",
+          "rawJournalNote": "2026-05-17 9:10pm - day after/near shot. nauseous, kind of waves not constant. tired, heavy body feeling. low appetite, dinner looked unappealing. not awful but enough that I want to mention it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 211.7,
+            "restingHeartRate": 74,
+            "sleepHours": 6.5,
+            "steps": 4900,
+            "activeMinutes": 23,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 18,
+          "date": "2026-05-18",
+          "rawJournalNote": "2026-05-18 2:35pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 211.5,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 19,
+          "date": "2026-05-19",
+          "rawJournalNote": "2026-05-19 6:45am - constipated, uncomfortable and slow. bloated after small meal. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 211.4,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 20,
+          "date": "2026-05-20",
+          "rawJournalNote": "2026-05-20 8:05pm - constipated, uncomfortable and slow. bloated after small meal. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 211.2,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 21,
+          "date": "2026-05-21",
+          "rawJournalNote": "2026-05-21 11:30am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 211.0,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6620,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 22,
+          "date": "2026-05-22",
+          "rawJournalNote": "2026-05-22 7:20am - shot day. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 210.8,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6800,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 23,
+          "date": "2026-05-23",
+          "rawJournalNote": "2026-05-23 9:10pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 210.6,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 24,
+          "date": "2026-05-24",
+          "rawJournalNote": "2026-05-24 2:35pm - day after/near shot. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 210.5,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 25,
+          "date": "2026-05-25",
+          "rawJournalNote": "2026-05-25 6:45am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 210.3,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 26,
+          "date": "2026-05-26",
+          "rawJournalNote": "2026-05-26 8:05pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 210.1,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6620,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 27,
+          "date": "2026-05-27",
+          "rawJournalNote": "2026-05-27 11:30am - constipated, uncomfortable and slow. bloated after small meal. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "bloating",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 209.9,
+            "restingHeartRate": 74,
+            "sleepHours": 6.5,
+            "steps": 6200,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 28,
+          "date": "2026-05-28",
+          "rawJournalNote": "2026-05-28 7:20am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 209.7,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6980,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 29,
+          "date": "2026-05-29",
+          "rawJournalNote": "2026-05-29 9:10pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 209.6,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 7160,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 30,
+          "date": "2026-05-30",
+          "rawJournalNote": "2026-05-30 2:35pm - day after/near shot. nauseous, kind of waves not constant. low appetite, dinner looked unappealing. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 209.4,
+            "restingHeartRate": 74,
+            "sleepHours": 6.8,
+            "steps": 6440,
+            "activeMinutes": 32,
+            "strengthTrainingMinutes": 12
+          }
+        }
+      ],
+      "thirtyDaySummary": {
+        "topReportedSymptoms": [
+          [
+            "nausea",
+            8
+          ],
+          [
+            "low appetite",
+            8
+          ],
+          [
+            "constipation",
+            6
+          ],
+          [
+            "bloating",
+            6
+          ],
+          [
+            "fatigue",
+            1
+          ]
+        ],
+        "moderateSymptomDays": 3,
+        "injectionDays": [
+          1,
+          8,
+          15,
+          22,
+          29
+        ],
+        "doseChangeDays": [
+          15
+        ],
+        "weightChangeLb": -5.2,
+        "avgSleepFirstWeek": 6.8,
+        "avgSleepLastWeek": 6.8,
+        "avgStepsFirstWeek": 6774,
+        "avgStepsLastWeek": 6714,
+        "doctorDiscussionPrompts": [
+          "Ask whether the nausea/vomiting pattern is expected at the current dose and timing.",
+          "Discuss bowel changes, hydration, and whether the current symptom pattern needs management.",
+          "Discuss energy level, protein intake, exercise tolerance, and whether strength or lean-mass monitoring is appropriate.",
+          "Review whether any symptoms require changes to monitoring, follow-up timing, or medication plan."
+        ]
+      }
+    },
+    {
+      "id": "syn-p002",
+      "displayName": "Patient B",
+      "syntheticPatientProfile": {
+        "ageRange": "40-49",
+        "context": "Dose escalation during the month, history of reflux-like stomach discomfort.",
+        "dataType": "synthetic fictional patient-generated health journal"
+      },
+      "journalEntries": [
+        {
+          "day": 1,
+          "date": "2026-05-01",
+          "rawJournalNote": "2026-05-01 6:45am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 189.2,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7720,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 2,
+          "date": "2026-05-02",
+          "rawJournalNote": "2026-05-02 8:05pm - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 189.0,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7900,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 3,
+          "date": "2026-05-03",
+          "rawJournalNote": "2026-05-03 11:30am - shot day. nauseous, kind of waves not constant. tired, heavy body feeling. mild, tracking it. sipped water slowly.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 188.8,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 6780,
+            "activeMinutes": 31,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 4,
+          "date": "2026-05-04",
+          "rawJournalNote": "2026-05-04 7:20am - day after/near shot. vomited once, then felt wiped out. nauseous, kind of waves not constant. tired, heavy body feeling. not awful but enough that I want to mention it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "vomiting",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 188.7,
+            "restingHeartRate": 69,
+            "sleepHours": 6.9,
+            "steps": 6360,
+            "activeMinutes": 28,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 5,
+          "date": "2026-05-05",
+          "rawJournalNote": "2026-05-05 9:10pm - day after/near shot. loose stool/diarrhea, stayed close to bathroom. stomach cramps / pressure. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "diarrhea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 188.5,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7540,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 6,
+          "date": "2026-05-06",
+          "rawJournalNote": "2026-05-06 2:35pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 188.3,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7720,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 7,
+          "date": "2026-05-07",
+          "rawJournalNote": "2026-05-07 6:45am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 188.1,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7900,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 8,
+          "date": "2026-05-08",
+          "rawJournalNote": "2026-05-08 8:05pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 187.9,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8080,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 9,
+          "date": "2026-05-09",
+          "rawJournalNote": "2026-05-09 11:30am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 187.8,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8260,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 10,
+          "date": "2026-05-10",
+          "rawJournalNote": "2026-05-10 7:20am - shot day. nauseous, kind of waves not constant. tired, heavy body feeling. mild, tracking it. skipped heavier meal.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 187.6,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 6240,
+            "activeMinutes": 31,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 11,
+          "date": "2026-05-11",
+          "rawJournalNote": "2026-05-11 9:10pm - day after/near shot. loose stool/diarrhea, stayed close to bathroom. stomach cramps / pressure. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "diarrhea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 187.4,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7720,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 12,
+          "date": "2026-05-12",
+          "rawJournalNote": "2026-05-12 2:35pm - day after/near shot. nauseous, kind of waves not constant. tired, heavy body feeling. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 187.2,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 6600,
+            "activeMinutes": 31,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 13,
+          "date": "2026-05-13",
+          "rawJournalNote": "2026-05-13 6:45am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 187.0,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8080,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 14,
+          "date": "2026-05-14",
+          "rawJournalNote": "2026-05-14 8:05pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 186.9,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8260,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 15,
+          "date": "2026-05-15",
+          "rawJournalNote": "2026-05-15 11:30am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 186.7,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7540,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 16,
+          "date": "2026-05-16",
+          "rawJournalNote": "2026-05-16 7:20am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 186.5,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7720,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 17,
+          "date": "2026-05-17",
+          "rawJournalNote": "2026-05-17 9:10pm - shot day. higher dose this week. nauseous, kind of waves not constant. tired, heavy body feeling. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": true,
+          "doseChangeDay": true,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 186.3,
+            "restingHeartRate": 69,
+            "sleepHours": 6.9,
+            "steps": 6000,
+            "activeMinutes": 28,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 18,
+          "date": "2026-05-18",
+          "rawJournalNote": "2026-05-18 2:35pm - day after/near shot. vomited once, then felt wiped out. nauseous, kind of waves not constant. tired, heavy body feeling. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "vomiting",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 186.1,
+            "restingHeartRate": 69,
+            "sleepHours": 6.9,
+            "steps": 6180,
+            "activeMinutes": 28,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 19,
+          "date": "2026-05-19",
+          "rawJournalNote": "2026-05-19 6:45am - day after/near shot. loose stool/diarrhea, stayed close to bathroom. stomach cramps / pressure. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "diarrhea",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 185.9,
+            "restingHeartRate": 69,
+            "sleepHours": 6.9,
+            "steps": 7660,
+            "activeMinutes": 34,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 20,
+          "date": "2026-05-20",
+          "rawJournalNote": "2026-05-20 8:05pm - loose stool/diarrhea, stayed close to bathroom. stomach cramps / pressure. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "diarrhea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 185.7,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7540,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 21,
+          "date": "2026-05-21",
+          "rawJournalNote": "2026-05-21 11:30am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 185.5,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7720,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 22,
+          "date": "2026-05-22",
+          "rawJournalNote": "2026-05-22 7:20am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 185.3,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7900,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 23,
+          "date": "2026-05-23",
+          "rawJournalNote": "2026-05-23 9:10pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 185.1,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8080,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 24,
+          "date": "2026-05-24",
+          "rawJournalNote": "2026-05-24 2:35pm - shot day. nauseous, kind of waves not constant. tired, heavy body feeling. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 184.9,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 6960,
+            "activeMinutes": 31,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 25,
+          "date": "2026-05-25",
+          "rawJournalNote": "2026-05-25 6:45am - day after/near shot. loose stool/diarrhea, stayed close to bathroom. stomach cramps / pressure. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "diarrhea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 184.7,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7540,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 26,
+          "date": "2026-05-26",
+          "rawJournalNote": "2026-05-26 8:05pm - day after/near shot. nauseous, kind of waves not constant. tired, heavy body feeling. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 184.5,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 6420,
+            "activeMinutes": 31,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 27,
+          "date": "2026-05-27",
+          "rawJournalNote": "2026-05-27 11:30am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 184.3,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7900,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 28,
+          "date": "2026-05-28",
+          "rawJournalNote": "2026-05-28 7:20am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 184.1,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8080,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 29,
+          "date": "2026-05-29",
+          "rawJournalNote": "2026-05-29 9:10pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 183.9,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 8260,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 30,
+          "date": "2026-05-30",
+          "rawJournalNote": "2026-05-30 2:35pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 183.7,
+            "restingHeartRate": 69,
+            "sleepHours": 7.2,
+            "steps": 7540,
+            "activeMinutes": 37,
+            "strengthTrainingMinutes": 12
+          }
+        }
+      ],
+      "thirtyDaySummary": {
+        "topReportedSymptoms": [
+          [
+            "nausea",
+            8
+          ],
+          [
+            "fatigue",
+            8
+          ],
+          [
+            "diarrhea",
+            5
+          ],
+          [
+            "abdominal discomfort",
+            5
+          ],
+          [
+            "vomiting",
+            2
+          ]
+        ],
+        "moderateSymptomDays": 4,
+        "injectionDays": [
+          3,
+          10,
+          17,
+          24
+        ],
+        "doseChangeDays": [
+          17
+        ],
+        "weightChangeLb": -5.5,
+        "avgSleepFirstWeek": 7.2,
+        "avgSleepLastWeek": 7.2,
+        "avgStepsFirstWeek": 7417,
+        "avgStepsLastWeek": 7528,
+        "doctorDiscussionPrompts": [
+          "Ask whether the nausea/vomiting pattern is expected at the current dose and timing.",
+          "Discuss bowel changes, hydration, and whether the current symptom pattern needs management.",
+          "Discuss energy level, protein intake, exercise tolerance, and whether strength or lean-mass monitoring is appropriate.",
+          "Review whether any symptoms require changes to monitoring, follow-up timing, or medication plan."
+        ]
+      }
+    },
+    {
+      "id": "syn-p003",
+      "displayName": "Patient C",
+      "syntheticPatientProfile": {
+        "ageRange": "50-59",
+        "context": "Tracking blood pressure concerns, anxiety, sleep, and appetite while on weekly injection.",
+        "dataType": "synthetic fictional patient-generated health journal"
+      },
+      "journalEntries": [
+        {
+          "day": 1,
+          "date": "2026-05-01",
+          "rawJournalNote": "2026-05-01 6:45am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 231.0,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5020,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 2,
+          "date": "2026-05-02",
+          "rawJournalNote": "2026-05-02 8:05pm - shot day. anxiety spike, especially later in day. sleep broken, woke up a few times. heart felt like it was racing for a bit. not awful but enough that I want to mention it. sipped water slowly.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "anxiety",
+              "category": "mood",
+              "severity": "moderate"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "moderate"
+            },
+            {
+              "name": "heart racing",
+              "category": "cardio",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 230.8,
+            "restingHeartRate": 81,
+            "sleepHours": 5.1,
+            "steps": 4600,
+            "activeMinutes": 21,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 3,
+          "date": "2026-05-03",
+          "rawJournalNote": "2026-05-03 11:30am - day after/near shot. anxiety spike, especially later in day. sleep broken, woke up a few times. heart felt like it was racing for a bit. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "anxiety",
+              "category": "mood",
+              "severity": "moderate"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "moderate"
+            },
+            {
+              "name": "heart racing",
+              "category": "cardio",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 230.6,
+            "restingHeartRate": 81,
+            "sleepHours": 5.1,
+            "steps": 4780,
+            "activeMinutes": 21,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 4,
+          "date": "2026-05-04",
+          "rawJournalNote": "2026-05-04 7:20am - day after/near shot. lightheaded when standing up. dull headache. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 230.5,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4660,
+            "activeMinutes": 20,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 5,
+          "date": "2026-05-05",
+          "rawJournalNote": "2026-05-05 9:10pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 230.3,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 6,
+          "date": "2026-05-06",
+          "rawJournalNote": "2026-05-06 2:35pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 230.1,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5020,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 7,
+          "date": "2026-05-07",
+          "rawJournalNote": "2026-05-07 6:45am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 229.9,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5200,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 8,
+          "date": "2026-05-08",
+          "rawJournalNote": "2026-05-08 8:05pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 229.7,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5380,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 9,
+          "date": "2026-05-09",
+          "rawJournalNote": "2026-05-09 11:30am - shot day. anxiety spike, especially later in day. sleep broken, woke up a few times. heart felt like it was racing for a bit. not awful but enough that I want to mention it. skipped heavier meal.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "anxiety",
+              "category": "mood",
+              "severity": "moderate"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "moderate"
+            },
+            {
+              "name": "heart racing",
+              "category": "cardio",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 229.6,
+            "restingHeartRate": 81,
+            "sleepHours": 5.1,
+            "steps": 4960,
+            "activeMinutes": 21,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 10,
+          "date": "2026-05-10",
+          "rawJournalNote": "2026-05-10 7:20am - day after/near shot. lightheaded when standing up. dull headache. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 229.4,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 3940,
+            "activeMinutes": 20,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 11,
+          "date": "2026-05-11",
+          "rawJournalNote": "2026-05-11 9:10pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 229.2,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5020,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 12,
+          "date": "2026-05-12",
+          "rawJournalNote": "2026-05-12 2:35pm - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 229.0,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5200,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 13,
+          "date": "2026-05-13",
+          "rawJournalNote": "2026-05-13 6:45am - sleep broken, woke up a few times. tired, heavy body feeling. mild, tracking it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 228.8,
+            "restingHeartRate": 79,
+            "sleepHours": 5.4,
+            "steps": 4080,
+            "activeMinutes": 18,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 14,
+          "date": "2026-05-14",
+          "rawJournalNote": "2026-05-14 8:05pm - sleep broken, woke up a few times. tired, heavy body feeling. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 228.7,
+            "restingHeartRate": 79,
+            "sleepHours": 5.4,
+            "steps": 4260,
+            "activeMinutes": 18,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 15,
+          "date": "2026-05-15",
+          "rawJournalNote": "2026-05-15 11:30am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 228.5,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 16,
+          "date": "2026-05-16",
+          "rawJournalNote": "2026-05-16 7:20am - shot day. anxiety spike, especially later in day. sleep broken, woke up a few times. heart felt like it was racing for a bit. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "anxiety",
+              "category": "mood",
+              "severity": "moderate"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "moderate"
+            },
+            {
+              "name": "heart racing",
+              "category": "cardio",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 228.3,
+            "restingHeartRate": 81,
+            "sleepHours": 5.1,
+            "steps": 4420,
+            "activeMinutes": 21,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 17,
+          "date": "2026-05-17",
+          "rawJournalNote": "2026-05-17 9:10pm - day after/near shot. lightheaded when standing up. dull headache. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 228.1,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4300,
+            "activeMinutes": 20,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 18,
+          "date": "2026-05-18",
+          "rawJournalNote": "2026-05-18 2:35pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 227.9,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5380,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 19,
+          "date": "2026-05-19",
+          "rawJournalNote": "2026-05-19 6:45am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 227.8,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5560,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 20,
+          "date": "2026-05-20",
+          "rawJournalNote": "2026-05-20 8:05pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 227.6,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 21,
+          "date": "2026-05-21",
+          "rawJournalNote": "2026-05-21 11:30am - sleep broken, woke up a few times. tired, heavy body feeling. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            },
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 227.4,
+            "restingHeartRate": 79,
+            "sleepHours": 5.4,
+            "steps": 3720,
+            "activeMinutes": 18,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 22,
+          "date": "2026-05-22",
+          "rawJournalNote": "2026-05-22 7:20am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 227.2,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5200,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 23,
+          "date": "2026-05-23",
+          "rawJournalNote": "2026-05-23 9:10pm - shot day. anxiety spike, especially later in day. sleep broken, woke up a few times. heart felt like it was racing for a bit. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "anxiety",
+              "category": "mood",
+              "severity": "moderate"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "moderate"
+            },
+            {
+              "name": "heart racing",
+              "category": "cardio",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 227.0,
+            "restingHeartRate": 81,
+            "sleepHours": 5.1,
+            "steps": 4780,
+            "activeMinutes": 21,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 24,
+          "date": "2026-05-24",
+          "rawJournalNote": "2026-05-24 2:35pm - day after/near shot. lightheaded when standing up. dull headache. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 226.9,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4660,
+            "activeMinutes": 20,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 25,
+          "date": "2026-05-25",
+          "rawJournalNote": "2026-05-25 6:45am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 226.7,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 26,
+          "date": "2026-05-26",
+          "rawJournalNote": "2026-05-26 8:05pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 226.5,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5020,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 27,
+          "date": "2026-05-27",
+          "rawJournalNote": "2026-05-27 11:30am - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 226.3,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5200,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 28,
+          "date": "2026-05-28",
+          "rawJournalNote": "2026-05-28 7:20am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 226.1,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5380,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 29,
+          "date": "2026-05-29",
+          "rawJournalNote": "2026-05-29 9:10pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 226.0,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 5560,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 30,
+          "date": "2026-05-30",
+          "rawJournalNote": "2026-05-30 2:35pm - shot day. lightheaded when standing up. dull headache. mild, tracking it. skipped heavier meal.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 225.8,
+            "restingHeartRate": 78,
+            "sleepHours": 6.3,
+            "steps": 3940,
+            "activeMinutes": 20,
+            "strengthTrainingMinutes": 12
+          }
+        }
+      ],
+      "thirtyDaySummary": {
+        "topReportedSymptoms": [
+          [
+            "poor sleep",
+            8
+          ],
+          [
+            "anxiety",
+            5
+          ],
+          [
+            "heart racing",
+            5
+          ],
+          [
+            "dizziness",
+            5
+          ],
+          [
+            "headache",
+            5
+          ],
+          [
+            "fatigue",
+            3
+          ]
+        ],
+        "moderateSymptomDays": 5,
+        "injectionDays": [
+          2,
+          9,
+          16,
+          23,
+          30
+        ],
+        "doseChangeDays": [],
+        "weightChangeLb": -5.2,
+        "avgSleepFirstWeek": 6.0,
+        "avgSleepLastWeek": 6.3,
+        "avgStepsFirstWeek": 4874,
+        "avgStepsLastWeek": 4942,
+        "doctorDiscussionPrompts": [
+          "Discuss energy level, protein intake, exercise tolerance, and whether strength or lean-mass monitoring is appropriate.",
+          "Discuss dizziness or heart-rate symptoms, especially if they continue or worsen.",
+          "Review anxiety and sleep changes alongside wearable trends.",
+          "Review whether any symptoms require changes to monitoring, follow-up timing, or medication plan."
+        ]
+      }
+    },
+    {
+      "id": "syn-p004",
+      "displayName": "Patient D",
+      "syntheticPatientProfile": {
+        "ageRange": "25-34",
+        "context": "Very active baseline, concerned about appetite suppression and possible muscle loss.",
+        "dataType": "synthetic fictional patient-generated health journal"
+      },
+      "journalEntries": [
+        {
+          "day": 1,
+          "date": "2026-05-01",
+          "rawJournalNote": "2026-05-01 6:45am - shot day. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 176.8,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10220,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 2,
+          "date": "2026-05-02",
+          "rawJournalNote": "2026-05-02 8:05pm - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 176.6,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10400,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 3,
+          "date": "2026-05-03",
+          "rawJournalNote": "2026-05-03 11:30am - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 176.4,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10580,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 4,
+          "date": "2026-05-04",
+          "rawJournalNote": "2026-05-04 7:20am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 176.3,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10760,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 5,
+          "date": "2026-05-05",
+          "rawJournalNote": "2026-05-05 9:10pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 176.1,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 6,
+          "date": "2026-05-06",
+          "rawJournalNote": "2026-05-06 2:35pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 175.9,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10220,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 17
+          }
+        },
+        {
+          "day": 7,
+          "date": "2026-05-07",
+          "rawJournalNote": "2026-05-07 6:45am - tired, heavy body feeling. legs felt weak during workout. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 175.7,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 9100,
+            "activeMinutes": 43,
+            "strengthTrainingMinutes": 2
+          }
+        },
+        {
+          "day": 8,
+          "date": "2026-05-08",
+          "rawJournalNote": "2026-05-08 8:05pm - shot day. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. sipped water slowly.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 175.5,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10580,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 9,
+          "date": "2026-05-09",
+          "rawJournalNote": "2026-05-09 11:30am - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 175.4,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 10160,
+            "activeMinutes": 46,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 10,
+          "date": "2026-05-10",
+          "rawJournalNote": "2026-05-10 7:20am - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 175.2,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 11,
+          "date": "2026-05-11",
+          "rawJournalNote": "2026-05-11 9:10pm - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 175.0,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10220,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 12,
+          "date": "2026-05-12",
+          "rawJournalNote": "2026-05-12 2:35pm - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 174.8,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10400,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 13,
+          "date": "2026-05-13",
+          "rawJournalNote": "2026-05-13 6:45am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 174.6,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10580,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 17
+          }
+        },
+        {
+          "day": 14,
+          "date": "2026-05-14",
+          "rawJournalNote": "2026-05-14 8:05pm - tired, heavy body feeling. legs felt weak during workout. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 174.5,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 9460,
+            "activeMinutes": 43,
+            "strengthTrainingMinutes": 2
+          }
+        },
+        {
+          "day": 15,
+          "date": "2026-05-15",
+          "rawJournalNote": "2026-05-15 11:30am - shot day. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. skipped heavier meal.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 174.3,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 16,
+          "date": "2026-05-16",
+          "rawJournalNote": "2026-05-16 7:20am - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 174.1,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10220,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 17,
+          "date": "2026-05-17",
+          "rawJournalNote": "2026-05-17 9:10pm - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 173.9,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10400,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 18,
+          "date": "2026-05-18",
+          "rawJournalNote": "2026-05-18 2:35pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 173.7,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10580,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 19,
+          "date": "2026-05-19",
+          "rawJournalNote": "2026-05-19 6:45am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 173.5,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10760,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 20,
+          "date": "2026-05-20",
+          "rawJournalNote": "2026-05-20 8:05pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 173.3,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 17
+          }
+        },
+        {
+          "day": 21,
+          "date": "2026-05-21",
+          "rawJournalNote": "2026-05-21 11:30am - tired, heavy body feeling. legs felt weak during workout. not awful but enough that I want to mention it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 173.1,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 8320,
+            "activeMinutes": 40,
+            "strengthTrainingMinutes": 2
+          }
+        },
+        {
+          "day": 22,
+          "date": "2026-05-22",
+          "rawJournalNote": "2026-05-22 7:20am - shot day. higher dose this week. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": true,
+          "doseChangeDay": true,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 172.9,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 9800,
+            "activeMinutes": 46,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 23,
+          "date": "2026-05-23",
+          "rawJournalNote": "2026-05-23 9:10pm - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. not awful but enough that I want to mention it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 172.7,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 9980,
+            "activeMinutes": 46,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 24,
+          "date": "2026-05-24",
+          "rawJournalNote": "2026-05-24 2:35pm - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. not awful but enough that I want to mention it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "moderate"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 172.5,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 10160,
+            "activeMinutes": 46,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 25,
+          "date": "2026-05-25",
+          "rawJournalNote": "2026-05-25 6:45am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 172.3,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 26,
+          "date": "2026-05-26",
+          "rawJournalNote": "2026-05-26 8:05pm - tired, heavy body feeling. legs felt weak during workout. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 172.1,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 8920,
+            "activeMinutes": 43,
+            "strengthTrainingMinutes": 10
+          }
+        },
+        {
+          "day": 27,
+          "date": "2026-05-27",
+          "rawJournalNote": "2026-05-27 11:30am - tired, heavy body feeling. legs felt weak during workout. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "moderate"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 171.9,
+            "restingHeartRate": 63,
+            "sleepHours": 7.3,
+            "steps": 8500,
+            "activeMinutes": 40,
+            "strengthTrainingMinutes": 2
+          }
+        },
+        {
+          "day": 28,
+          "date": "2026-05-28",
+          "rawJournalNote": "2026-05-28 7:20am - tired, heavy body feeling. legs felt weak during workout. mild, tracking it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "muscle weakness",
+              "category": "energy",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 171.6,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 9280,
+            "activeMinutes": 43,
+            "strengthTrainingMinutes": 2
+          }
+        },
+        {
+          "day": 29,
+          "date": "2026-05-29",
+          "rawJournalNote": "2026-05-29 9:10pm - shot day. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 171.4,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10760,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        },
+        {
+          "day": 30,
+          "date": "2026-05-30",
+          "rawJournalNote": "2026-05-30 2:35pm - day after/near shot. low appetite, dinner looked unappealing. nauseous, kind of waves not constant. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "low appetite",
+              "category": "appetite",
+              "severity": "mild"
+            },
+            {
+              "name": "nausea",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 171.2,
+            "restingHeartRate": 63,
+            "sleepHours": 7.6,
+            "steps": 10040,
+            "activeMinutes": 49,
+            "strengthTrainingMinutes": 25
+          }
+        }
+      ],
+      "thirtyDaySummary": {
+        "topReportedSymptoms": [
+          [
+            "low appetite",
+            14
+          ],
+          [
+            "nausea",
+            14
+          ],
+          [
+            "fatigue",
+            6
+          ],
+          [
+            "muscle weakness",
+            6
+          ]
+        ],
+        "moderateSymptomDays": 6,
+        "injectionDays": [
+          1,
+          8,
+          15,
+          22,
+          29
+        ],
+        "doseChangeDays": [
+          22
+        ],
+        "weightChangeLb": -5.6,
+        "avgSleepFirstWeek": 7.6,
+        "avgSleepLastWeek": 7.5,
+        "avgStepsFirstWeek": 10188,
+        "avgStepsLastWeek": 9671,
+        "doctorDiscussionPrompts": [
+          "Ask whether the nausea/vomiting pattern is expected at the current dose and timing.",
+          "Discuss energy level, protein intake, exercise tolerance, and whether strength or lean-mass monitoring is appropriate.",
+          "Review whether any symptoms require changes to monitoring, follow-up timing, or medication plan."
+        ]
+      }
+    },
+    {
+      "id": "syn-p005",
+      "displayName": "Patient E",
+      "syntheticPatientProfile": {
+        "ageRange": "60-69",
+        "context": "Older adult tracking constipation, hydration, dizziness, and lower activity during treatment.",
+        "dataType": "synthetic fictional patient-generated health journal"
+      },
+      "journalEntries": [
+        {
+          "day": 1,
+          "date": "2026-05-01",
+          "rawJournalNote": "2026-05-01 6:45am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 203.4,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5920,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 2,
+          "date": "2026-05-02",
+          "rawJournalNote": "2026-05-02 8:05pm - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 203.2,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6100,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 3,
+          "date": "2026-05-03",
+          "rawJournalNote": "2026-05-03 11:30am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 203.0,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 4,
+          "date": "2026-05-04",
+          "rawJournalNote": "2026-05-04 7:20am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 202.9,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6460,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 5,
+          "date": "2026-05-05",
+          "rawJournalNote": "2026-05-05 9:10pm - day after/near shot. lightheaded when standing up. dull headache. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 202.7,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 6,
+          "date": "2026-05-06",
+          "rawJournalNote": "2026-05-06 2:35pm - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 202.5,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5920,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 7,
+          "date": "2026-05-07",
+          "rawJournalNote": "2026-05-07 6:45am - constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 202.3,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6100,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 8,
+          "date": "2026-05-08",
+          "rawJournalNote": "2026-05-08 8:05pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 202.1,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 9,
+          "date": "2026-05-09",
+          "rawJournalNote": "2026-05-09 11:30am - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 202.0,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6460,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 10,
+          "date": "2026-05-10",
+          "rawJournalNote": "2026-05-10 7:20am - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 201.8,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5740,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 11,
+          "date": "2026-05-11",
+          "rawJournalNote": "2026-05-11 9:10pm - shot day. lightheaded when standing up. dull headache. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 201.6,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5020,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 12,
+          "date": "2026-05-12",
+          "rawJournalNote": "2026-05-12 2:35pm - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 201.4,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6100,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 13,
+          "date": "2026-05-13",
+          "rawJournalNote": "2026-05-13 6:45am - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. sipped water slowly.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 201.2,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 14,
+          "date": "2026-05-14",
+          "rawJournalNote": "2026-05-14 8:05pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 201.1,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6460,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 15,
+          "date": "2026-05-15",
+          "rawJournalNote": "2026-05-15 11:30am - tired, heavy body feeling. sleep broken, woke up a few times. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 200.9,
+            "restingHeartRate": 73,
+            "sleepHours": 6.0,
+            "steps": 4440,
+            "activeMinutes": 22,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 16,
+          "date": "2026-05-16",
+          "rawJournalNote": "2026-05-16 7:20am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 200.7,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5920,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 17,
+          "date": "2026-05-17",
+          "rawJournalNote": "2026-05-17 9:10pm - energy ok. wrote this down because I actually felt steady today.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 200.5,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6100,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 18,
+          "date": "2026-05-18",
+          "rawJournalNote": "2026-05-18 2:35pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 200.3,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 19,
+          "date": "2026-05-19",
+          "rawJournalNote": "2026-05-19 6:45am - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 200.2,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6460,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 20,
+          "date": "2026-05-20",
+          "rawJournalNote": "2026-05-20 8:05pm - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. skipped heavier meal.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 200.0,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5740,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 21,
+          "date": "2026-05-21",
+          "rawJournalNote": "2026-05-21 11:30am - no major side effects today. appetite still lower than before, but manageable.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 199.8,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5920,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 22,
+          "date": "2026-05-22",
+          "rawJournalNote": "2026-05-22 7:20am - tired, heavy body feeling. sleep broken, woke up a few times. mild, tracking it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 199.6,
+            "restingHeartRate": 73,
+            "sleepHours": 6.0,
+            "steps": 4800,
+            "activeMinutes": 22,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 23,
+          "date": "2026-05-23",
+          "rawJournalNote": "2026-05-23 9:10pm - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 199.4,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 24,
+          "date": "2026-05-24",
+          "rawJournalNote": "2026-05-24 2:35pm - felt mostly like myself. had protein with lunch and kept water bottle nearby.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 199.3,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6460,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 25,
+          "date": "2026-05-25",
+          "rawJournalNote": "2026-05-25 6:45am - shot day. lightheaded when standing up. dull headache. mild, tracking it. skipped heavier meal.",
+          "injectionDay": true,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "dizziness",
+              "category": "cardio",
+              "severity": "mild"
+            },
+            {
+              "name": "headache",
+              "category": "other",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 199.1,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 4840,
+            "activeMinutes": 24,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 26,
+          "date": "2026-05-26",
+          "rawJournalNote": "2026-05-26 8:05pm - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. mild, tracking it. walk was shorter than usual.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "mild"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 198.9,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5920,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        },
+        {
+          "day": 27,
+          "date": "2026-05-27",
+          "rawJournalNote": "2026-05-27 11:30am - day after/near shot. constipated, uncomfortable and slow. stomach cramps / pressure. not awful but enough that I want to mention it. will see if this repeats tomorrow.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 3,
+          "annotatedSymptoms": [
+            {
+              "name": "constipation",
+              "category": "gi",
+              "severity": "moderate"
+            },
+            {
+              "name": "abdominal discomfort",
+              "category": "gi",
+              "severity": "moderate"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 198.7,
+            "restingHeartRate": 72,
+            "sleepHours": 6.6,
+            "steps": 5500,
+            "activeMinutes": 26,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 28,
+          "date": "2026-05-28",
+          "rawJournalNote": "2026-05-28 7:20am - nothing dramatic. stomach fine. slept okay-ish, still watching hydration.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 198.5,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 6280,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 4
+          }
+        },
+        {
+          "day": 29,
+          "date": "2026-05-29",
+          "rawJournalNote": "2026-05-29 9:10pm - tired, heavy body feeling. sleep broken, woke up a few times. mild, tracking it. ate plain toast / small protein.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 2,
+          "annotatedSymptoms": [
+            {
+              "name": "fatigue",
+              "category": "energy",
+              "severity": "mild"
+            },
+            {
+              "name": "poor sleep",
+              "category": "sleep",
+              "severity": "mild"
+            }
+          ],
+          "wearableMetrics": {
+            "weightLb": 198.4,
+            "restingHeartRate": 73,
+            "sleepHours": 6.0,
+            "steps": 5160,
+            "activeMinutes": 22,
+            "strengthTrainingMinutes": 0
+          }
+        },
+        {
+          "day": 30,
+          "date": "2026-05-30",
+          "rawJournalNote": "2026-05-30 2:35pm - pretty normal day. ate smaller portions but no big symptoms. walked after dinner.",
+          "injectionDay": false,
+          "doseChangeDay": false,
+          "selfRatedSeverity": 0,
+          "annotatedSymptoms": [],
+          "wearableMetrics": {
+            "weightLb": 198.2,
+            "restingHeartRate": 72,
+            "sleepHours": 6.9,
+            "steps": 5740,
+            "activeMinutes": 29,
+            "strengthTrainingMinutes": 12
+          }
+        }
+      ],
+      "thirtyDaySummary": {
+        "topReportedSymptoms": [
+          [
+            "constipation",
+            8
+          ],
+          [
+            "abdominal discomfort",
+            8
+          ],
+          [
+            "dizziness",
+            3
+          ],
+          [
+            "headache",
+            3
+          ],
+          [
+            "fatigue",
+            3
+          ],
+          [
+            "poor sleep",
+            3
+          ]
+        ],
+        "moderateSymptomDays": 1,
+        "injectionDays": [
+          4,
+          11,
+          18,
+          25
+        ],
+        "doseChangeDays": [],
+        "weightChangeLb": -5.2,
+        "avgSleepFirstWeek": 6.9,
+        "avgSleepLastWeek": 6.7,
+        "avgStepsFirstWeek": 5945,
+        "avgStepsLastWeek": 5700,
+        "doctorDiscussionPrompts": [
+          "Discuss bowel changes, hydration, and whether the current symptom pattern needs management.",
+          "Discuss energy level, protein intake, exercise tolerance, and whether strength or lean-mass monitoring is appropriate.",
+          "Discuss dizziness or heart-rate symptoms, especially if they continue or worsen.",
+          "Review whether any symptoms require changes to monitoring, follow-up timing, or medication plan."
+        ]
+      }
+    }
+  ]
+}

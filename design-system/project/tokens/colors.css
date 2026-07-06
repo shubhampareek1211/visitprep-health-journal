@@ -1,0 +1,105 @@
+/* ── Color tokens ─────────────────────────────────────────────────────────
+   Calm clinical SaaS palette. Mostly white / off-white / cool gray, with a
+   teal-emerald primary, amber for caution, red reserved for severe + safety.
+   No saturated blue, no purple, no gradients. */
+
+:root {
+  /* ── Neutral (cool gray) ramp ── */
+  --gray-0:   #ffffff;
+  --gray-25:  #fafbfb;
+  --gray-50:  #f5f7f7;
+  --gray-100: #eef1f2;
+  --gray-150: #e6eaeb;
+  --gray-200: #dce1e3;
+  --gray-300: #c3cbcf;
+  --gray-400: #98a3a9;
+  --gray-500: #6a757c;
+  --gray-600: #4c565c;
+  --gray-700: #353d42;
+  --gray-800: #232a2e;
+  --gray-900: #151a1d;
+
+  /* ── Teal-emerald (primary accent) ── */
+  --teal-50:  #e9f6f3;
+  --teal-100: #cdeae3;
+  --teal-200: #9fd7cb;
+  --teal-300: #63bdac;
+  --teal-400: #2ba08c;
+  --teal-500: #128a78;
+  --teal-600: #0e7466;
+  --teal-700: #0b5b50;
+  --teal-800: #0a4942;
+
+  /* ── Amber (caution) ── */
+  --amber-50:  #fdf4e4;
+  --amber-100: #f8e4bf;
+  --amber-300: #e6b24f;
+  --amber-500: #c07d11;
+  --amber-600: #a2670a;
+  --amber-700: #7e4f07;
+
+  /* ── Red (severe / safety only) ── */
+  --red-50:  #fbece9;
+  --red-100: #f5d4cf;
+  --red-300: #e59389;
+  --red-500: #c93a2c;
+  --red-600: #ad2c20;
+  --red-700: #88211a;
+
+  /* ── Surfaces ── */
+  --canvas:          var(--gray-50);   /* app background */
+  --surface:         var(--gray-0);    /* cards, panels */
+  --surface-sunken:  var(--gray-100);  /* wells, inputs at rest, table zebra */
+  --surface-raised:  var(--gray-0);    /* popovers, menus (pairs with shadow) */
+  --surface-accent:  var(--teal-50);   /* tinted accent panel */
+
+  /* ── Borders ── */
+  --border-subtle:  var(--gray-150);
+  --border-default: var(--gray-200);
+  --border-strong:  var(--gray-300);
+  --border-accent:  var(--teal-200);
+
+  /* ── Text ── */
+  --text-strong:    var(--gray-900);
+  --text-body:      var(--gray-700);
+  --text-muted:     var(--gray-500);
+  --text-subtle:    var(--gray-400);
+  --text-on-accent: var(--gray-0);
+  --text-link:      var(--teal-600);
+
+  /* ── Accent (interactive primary) ── */
+  --accent:         var(--teal-600);
+  --accent-hover:   var(--teal-700);
+  --accent-pressed: var(--teal-800);
+  --accent-tint:    var(--teal-50);
+  --accent-tint-2:  var(--teal-100);
+  --accent-text:    var(--teal-700);
+
+  /* ── Caution (amber) ── */
+  --caution:        var(--amber-600);
+  --caution-tint:   var(--amber-50);
+  --caution-border: var(--amber-100);
+  --caution-text:   var(--amber-700);
+
+  /* ── Danger / safety (red) ── */
+  --danger:         var(--red-600);
+  --danger-tint:    var(--red-50);
+  --danger-border:  var(--red-100);
+  --danger-text:    var(--red-700);
+
+  /* ── Positive (uses teal family to stay calm) ── */
+  --positive:       var(--teal-600);
+  --positive-tint:  var(--teal-50);
+
+  /* ── Focus ── */
+  --focus-ring:     color-mix(in srgb, var(--teal-500) 55%, transparent);
+
+  /* ── Data-viz series (muted, clinical) ── */
+  --viz-teal:   #128a78;
+  --viz-slate:  #5a7480;
+  --viz-amber:  #c07d11;
+  --viz-sand:   #b08a5a;
+  --viz-clay:   #b5675a;
+  --viz-grid:   #e6eaeb;
+  --viz-axis:   #98a3a9;
+}

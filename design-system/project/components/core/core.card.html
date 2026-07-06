@@ -1,0 +1,71 @@
+<!-- @dsCard group="Components" viewport="700x430" name="Core — Buttons, Badges, KPI, Status" subtitle="Button · Badge · Card · KpiCard · StatusDot" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--canvas); }
+  .block { margin-bottom: 18px; }
+  .lbl { font-size: 10px; letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 9px; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, Badge, Card, KpiCard, StatusDot } = window.VisitPrepDesignSystem_2c5c4e;
+  function Demo() {
+    return (
+      <div>
+        <div className="block">
+          <div className="lbl">Buttons</div>
+          <div className="row">
+            <Button variant="primary" icon="sparkles">Extract signals</Button>
+            <Button variant="secondary" icon="plus">Add note</Button>
+            <Button variant="ghost" size="sm">Cancel</Button>
+            <Button variant="danger" size="sm" icon="trash-2">Delete</Button>
+            <Button variant="primary" disabled>Disabled</Button>
+          </div>
+        </div>
+        <div className="block">
+          <div className="lbl">Badges</div>
+          <div className="row">
+            <Badge tone="accent" icon="syringe">Injection day</Badge>
+            <Badge tone="caution">Dose change 0.5 → 1.0 mg</Badge>
+            <Badge tone="danger" icon="shield-alert">Severe</Badge>
+            <Badge tone="positive">Ready</Badge>
+            <Badge tone="neutral">Synthetic data</Badge>
+            <Badge tone="accent" solid>3</Badge>
+          </div>
+        </div>
+        <div className="block">
+          <div className="lbl">Status</div>
+          <div className="row" style={{gap:18}}>
+            <span style={{display:'inline-flex',alignItems:'center',gap:7,fontSize:13}}><StatusDot level="mild"/> Mild</span>
+            <span style={{display:'inline-flex',alignItems:'center',gap:7,fontSize:13}}><StatusDot level="moderate"/> Moderate</span>
+            <span style={{display:'inline-flex',alignItems:'center',gap:7,fontSize:13}}><StatusDot level="severe"/> Severe</span>
+            <span style={{display:'inline-flex',alignItems:'center',gap:7,fontSize:13}}><StatusDot level="none"/> None</span>
+          </div>
+        </div>
+        <div className="block" style={{marginBottom:0}}>
+          <div className="lbl">KPI cards</div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
+            <KpiCard label="Weight change" value="−3.4" unit="lb" icon="weight" delta="−1.1%" hint="30 days"/>
+            <KpiCard label="Moderate days" value="6" unit="/ 30" icon="alert-triangle" delta="2 fewer" deltaTone="positive"/>
+            <KpiCard label="Resting HR" value="62" unit="bpm" icon="heart-pulse" delta="−3" hint="avg"/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(() => lucide.createIcons(), 60);
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+/* Webfonts — loaded from Google Fonts CDN.
+   Public Sans: USWDS / US Web Design System face. Trustworthy, clinical,
+   excellent tabular figures — chosen for a healthcare context rather than the
+   ubiquitous Inter/Roboto. IBM Plex Mono carries synthetic IDs and raw data.
+   NOTE: these are CDN @imports, not self-hosted binaries. If the user needs an
+   offline build, swap to self-hosted .woff2 and update src: url() here. */
+
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap");

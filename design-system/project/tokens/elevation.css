@@ -1,0 +1,23 @@
+/* ── Elevation tokens ─────────────────────────────────────────────────────
+   Soft, low, cool-tinted shadows. Clinical SaaS uses borders first and shadow
+   sparingly — elevation rises only for floating surfaces (menus, dialogs). */
+
+:root {
+  /* Resting cards lean on borders; shadow is barely-there. */
+  --shadow-xs: 0 1px 1px rgba(21, 26, 29, 0.04);
+  --shadow-sm: 0 1px 2px rgba(21, 26, 29, 0.06), 0 1px 1px rgba(21, 26, 29, 0.04);
+  --shadow-md: 0 2px 6px rgba(21, 26, 29, 0.07), 0 1px 2px rgba(21, 26, 29, 0.05);
+  --shadow-lg: 0 8px 24px rgba(21, 26, 29, 0.10), 0 2px 6px rgba(21, 26, 29, 0.06);
+  --shadow-xl: 0 16px 40px rgba(21, 26, 29, 0.14), 0 4px 10px rgba(21, 26, 29, 0.07);
+
+  /* Focus ring as a layered shadow */
+  --ring-focus: 0 0 0 3px var(--focus-ring);
+  --ring-inset-border: inset 0 0 0 1px var(--border-default);
+
+  /* Motion — calm, quick, no bounce */
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-base: 180ms; /* @kind other */
+  --duration-slow: 260ms; /* @kind other */
+}
