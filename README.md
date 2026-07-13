@@ -137,5 +137,6 @@ Located in `deliverables/`:
 - **`VisitPrep_Clinical_NLP_Report.docx`** — 2-page technical report in Word (two-column research-paper format: abstract, introduction, background, system design, evaluation, limitations, references).
 - **`VisitPrep_Clinical_NLP_Report.pdf`** — the same paper typeset with LaTeX (source in `report.tex`).
 - **`VisitPrep_Clinical_NLP_Deck.pptx`** — 12-slide overview of the topic and this POC, styled with the VisitPrep design system.
+- **`VisitPrep_Presentation.mp4`** — recorded presentation of the deck and the working application.
 
 _This POC is a demonstration prototype built for a healthcare-focused technical assessment. It is not a medical device and must not be used for clinical decision-making._
