@@ -21,3 +21,9 @@ test-results/
 
 # Local editor / agent config — do not publish
 .claude/
+
+# LaTeX intermediates
+*.aux
+*.out
+*.toc
+.Rhistory
