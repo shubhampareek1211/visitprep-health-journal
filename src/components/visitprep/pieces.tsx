@@ -34,10 +34,10 @@ export function PatientHeader({ p }: { p: Patient }) {
           <span style={{
             fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)",
             background: "var(--surface-sunken)", padding: "2px 7px", borderRadius: "var(--radius-sm)"
-          }}>{p.id}</span>
+          }}>{p.sourceId}</span>
         </div>
         <div style={{ marginTop: 4, fontSize: "var(--text-sm)", color: "var(--text-muted)" }}>
-          {p.age} · {p.sex} · {p.med} · {p.dose}
+          Age {p.age} · {p.med} · {p.dose}
         </div>
       </div>
       <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>

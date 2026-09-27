@@ -52,9 +52,16 @@ function main() {
       );
       const extracted = extractClinicalSignals(entry);
       const extractedNames = new Set(extracted.map((signal) => signal.symptom));
+      const representative = new Map<string, (typeof extracted)[number]>();
+      for (const signal of extracted) {
+        const current = representative.get(signal.symptom);
+        if (!current || (current.assertionStatus !== "present" && signal.assertionStatus === "present")) {
+          representative.set(signal.symptom, signal);
+        }
+      }
 
       expectedSignals += expected.size;
-      extractedSignals += extracted.length;
+      extractedSignals += extractedNames.size;
 
       for (const expectedName of expected.keys()) {
         ensureScore(perSymptom, expectedName);
@@ -67,7 +74,7 @@ function main() {
         }
       }
 
-      for (const signal of extracted) {
+      for (const signal of representative.values()) {
         ensureScore(perSymptom, signal.symptom);
         if (!expected.has(signal.symptom)) {
           falsePositive += 1;
@@ -101,6 +108,15 @@ function main() {
           evidenceSpanMatches += 1;
         }
       }
+      for (const signal of extracted) {
+        if (
+          signal.evidenceStart >= 0 &&
+          signal.evidenceEnd <= entry.rawJournalNote.length &&
+          entry.rawJournalNote.slice(signal.evidenceStart, signal.evidenceEnd) !== signal.evidenceText
+        ) {
+          throw new Error(`Invalid evidence span for ${patient.id} day ${entry.day}`);
+        }
+      }
     }
   }
 
@@ -125,6 +141,9 @@ function main() {
   };
 
   console.log(JSON.stringify(result, null, 2));
+  if (falsePositive > 0 || falseNegative > 0 || negationFalsePositiveCount > 0 || evidenceSpanMatches !== evidenceSpanChecks) {
+    process.exitCode = 1;
+  }
 }
 
 function ensureScore(scores: Record<string, SymptomScore>, symptom: string) {

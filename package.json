@@ -7,23 +7,34 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "nlp:evaluate": "npx --yes tsx scripts/evaluate_nlp.ts"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "nlp:evaluate": "tsx scripts/evaluate_nlp.ts"
   },
   "dependencies": {
-    "lucide-react": "^1.22.0",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "recharts": "^3.9.0"
+    "drizzle-orm": "0.45.3",
+    "lucide-react": "1.22.0",
+    "next": "16.3.6",
+    "pg": "8.23.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "recharts": "3.9.0",
+    "zod": "4.6.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
-    "tailwindcss": "latest",
-    "typescript": "latest"
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "26.0.1",
+    "@types/pg": "8.23.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "drizzle-kit": "0.31.11",
+    "eslint": "9.39.3",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "4.3.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
   }
 }

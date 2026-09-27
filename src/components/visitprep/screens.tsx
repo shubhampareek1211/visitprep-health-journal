@@ -6,52 +6,65 @@ import {
   SymptomChip, Textarea, Toggle
 } from "@/components/ds";
 import { NoteRow, PatientHeader, SectionLabel } from "@/components/visitprep/pieces";
-import {
-  buildReport, createNote, DEFAULT_NOTE_DATE, vpExtract,
-  type Note, type Patient, type Symptom
-} from "@/lib/visitprep/data";
+import type { Note, Patient, Symptom } from "@/lib/visitprep/data";
+import type { DoctorReport } from "@/types/health";
 
-const TODAY = DEFAULT_NOTE_DATE;
+const TODAY = "2026-06-13";
+export type NoteInput = { text: string; date: string; injection: boolean; clientRequestId: string };
+type SaveNote = (note: NoteInput) => Promise<void>;
 
 /* ── Overview ───────────────────────────────────────────────────────── */
-export function Overview({ p, onAddNote }: { p: Patient; onAddNote: (note: Note) => void }) {
-  const [draft, setDraft] = React.useState(
-    "Felt nauseous after the injection and very tired by the afternoon. Couldn't sleep well."
-  );
+export function Overview({ p, onAddNote, draft, onDraftChange }: { p: Patient; onAddNote: SaveNote; draft: string; onDraftChange: (value: string) => void }) {
   const [isInjection, setIsInjection] = React.useState(true);
+  const [date, setDate] = React.useState(p.reviewEnd ?? TODAY);
+  const [error, setError] = React.useState("");
   const [extracted, setExtracted] = React.useState<Symptom[] | null>(null);
   const [selected, setSelected] = React.useState<string | null>(null);
   const [busy, setBusy] = React.useState(false);
   const [saved, setSaved] = React.useState(false);
-  const extractTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const saveRequest = React.useRef<{ content: string; id: string } | null>(null);
   const savedTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => () => {
-    if (extractTimer.current) clearTimeout(extractTimer.current);
     if (savedTimer.current) clearTimeout(savedTimer.current);
   }, []);
 
-  const wDelta = (p.weightEnd - p.weightStart).toFixed(1);
+  const weightKnown = p.weightStart != null && p.weightEnd != null;
+  const wDelta = weightKnown ? (p.weightEnd! - p.weightStart!).toFixed(1) : null;
 
-  function runExtract() {
+  async function runExtract() {
     setBusy(true);
+    setError("");
     setExtracted(null);
-    extractTimer.current = setTimeout(() => {
-      const sig = vpExtract(draft, isInjection);
+    try {
+      const response = await fetch("/api/v1/extractions/preview", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date, note: draft, injectionDay: isInjection }) });
+      if (!response.ok) throw new Error((await response.json()).error?.message ?? "Extraction failed.");
+      const result = await response.json();
+      const sig: Symptom[] = result.signals.filter((signal: { assertionStatus: string }) => signal.assertionStatus === "present" || signal.assertionStatus === "uncertain")
+        .map((signal: { normalizedSymptom: string; severity: string; matchedText: string; relatedToInjection: boolean; assertionStatus: Symptom["assertionStatus"]; evidenceText: string; confidence: number; severityReason: string; temporalContext: string[]; relatedToInjectionReason: string; extractionMethod: Symptom["extractionMethod"] }) => ({
+          label: signal.normalizedSymptom, level: signal.severity === "unknown" ? "none" : signal.severity as Symptom["level"], match: signal.matchedText, inj: signal.relatedToInjection,
+          assertionStatus: signal.assertionStatus, evidenceText: signal.evidenceText, confidence: signal.confidence, severityReason: signal.severityReason,
+          temporalContext: signal.temporalContext, relatedToInjectionReason: signal.relatedToInjectionReason, extractionMethod: signal.extractionMethod
+        }));
       setExtracted(sig);
       setSelected(sig[0] ? sig[0].label : null);
-      setBusy(false);
-    }, 420);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "Extraction failed."); }
+    finally { setBusy(false); }
   }
 
-  function saveNote() {
+  async function saveNote() {
     if (!draft.trim()) return;
-    onAddNote(createNote(draft, isInjection, TODAY));
-    setDraft("");
-    setExtracted(null);
-    setSelected(null);
-    setSaved(true);
-    savedTimer.current = setTimeout(() => setSaved(false), 2200);
+    setBusy(true);
+    setError("");
+    const content = JSON.stringify({ text: draft.trim(), date, injection: isInjection });
+    if (saveRequest.current?.content !== content) saveRequest.current = { content, id: crypto.randomUUID() };
+    try {
+      await onAddNote({ text: draft.trim(), date, injection: isInjection, clientRequestId: saveRequest.current.id });
+      saveRequest.current = null;
+      onDraftChange(""); setExtracted(null); setSelected(null); setSaved(true);
+      savedTimer.current = setTimeout(() => setSaved(false), 2200);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "Note could not be saved."); }
+    finally { setBusy(false); }
   }
 
   const selSig = extracted && extracted.find((s) => s.label === selected);
@@ -63,8 +76,8 @@ export function Overview({ p, onAddNote }: { p: Patient; onAddNote: (note: Note)
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }}>
         <KpiCard label="Review window" value={p.reviewDays} unit="days" icon="calendar-range" hint={p.reviewWindow.split(",")[0]} />
         <KpiCard label="Injection days" value={p.injectionDays} icon="syringe" hint="this window" />
-        <KpiCard label="Top symptom" value={<span style={{ fontSize: 18, textTransform: "capitalize" }}>{p.topSymptoms[0]}</span>} icon="activity" hint={p.symptomFreq[0].value + " of 30 days"} />
-        <KpiCard label="Weight change" value={wDelta} unit="lb" icon="weight" delta={(((p.weightEnd - p.weightStart) / p.weightStart) * 100).toFixed(1) + "%"} hint="30 days" />
+        <KpiCard label="Top symptom" value={<span style={{ fontSize: 18, textTransform: "capitalize" }}>{p.topSymptoms[0] ?? "None reported"}</span>} icon="activity" hint={(p.symptomFreq[0]?.value ?? 0) + " of 30 days"} />
+        <KpiCard label="Weight change" value={wDelta ?? "Unavailable"} unit={wDelta ? "lb" : undefined} delta={weightKnown && p.weightStart !== 0 ? (((p.weightEnd! - p.weightStart!) / p.weightStart!) * 100).toFixed(1) + "%" : undefined} icon="weight" hint="30 days" />
         <KpiCard label="Moderate+ days" value={p.moderateDays} unit="/ 30" icon="alert-triangle" deltaTone="caution" />
       </div>
 
@@ -75,27 +88,27 @@ export function Overview({ p, onAddNote }: { p: Patient; onAddNote: (note: Note)
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: "var(--text-sm)", color: "var(--text-body)" }}>
                 <Icon name="calendar" size={15} style={{ color: "var(--text-muted)" }} />
-                <span style={{ fontFamily: "var(--font-mono)" }}>2026-06-13</span>
-                <span style={{ color: "var(--text-subtle)" }}>· Sat</span>
+                <input type="date" value={date} onChange={(event) => setDate(event.target.value)} style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", border: "1px solid var(--border-strong)", borderRadius: "var(--radius-md)", padding: "4px 8px", background: "var(--surface)" }} />
               </div>
               <div style={{ marginLeft: "auto" }}>
                 <Toggle label="Injection day" checked={isInjection} onChange={setIsInjection} />
               </div>
             </div>
-            <Textarea rows={4} value={draft} onChange={(e) => setDraft(e.target.value)}
+            <Textarea rows={4} value={draft} onChange={(e) => onDraftChange(e.target.value)}
               placeholder="How did you feel today? Note symptoms, appetite, sleep, injection context…"
               hint="Notes are the source. Signals are extracted locally and traced back to your words." />
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 12 }}>
               <Button variant="primary" icon={busy ? "loader" : "sparkles"} onClick={runExtract} disabled={busy || !draft.trim()}>
                 {busy ? "Extracting…" : "Extract signals"}
               </Button>
-              <Button variant="secondary" icon="plus" onClick={saveNote} disabled={!draft.trim()}>Save note</Button>
+              <Button variant="secondary" icon="plus" onClick={saveNote} disabled={busy || !draft.trim() || !date}>Save note</Button>
               {saved && (
                 <span style={{ display: "inline-flex", alignItems: "center", gap: 5, fontSize: "var(--text-xs)", color: "var(--accent-text)" }}>
                   <Icon name="check" size={14} /> Saved to timeline
                 </span>
               )}
             </div>
+            {error && <div role="alert" style={{ color: "var(--danger-text)", fontSize: "var(--text-sm)", marginTop: 8 }}>{error}</div>}
           </div>
 
           <div style={{ borderLeft: "1px solid var(--border-subtle)", paddingLeft: 18, display: "flex", flexDirection: "column" }}>
@@ -116,7 +129,7 @@ export function Overview({ p, onAddNote }: { p: Patient; onAddNote: (note: Note)
                 </div>
                 {selSig && (
                   <div style={{ marginTop: 12 }}>
-                    <EvidenceCard signal={selSig.label} level={selSig.level} date="2026-06-13"
+                    <EvidenceCard signal={selSig.label} level={selSig.level} date={date}
                       snippet={selSig.evidenceText || draft} match={selSig.match} injectionAdjacent={selSig.inj}
                       confidence={selSig.confidence} assertionStatus={selSig.assertionStatus}
                       severityReason={selSig.severityReason} temporalContext={selSig.temporalContext}
@@ -144,12 +157,13 @@ export function Overview({ p, onAddNote }: { p: Patient; onAddNote: (note: Note)
 
 /* ── Analytics ──────────────────────────────────────────────────────── */
 function TrendChart({ values, color, height = 120 }: { values: number[]; color: string; height?: number }) {
+  const gid = "tg" + React.useId().replace(/:/g, "");
+  if (!values.length) return <div style={{ height, display: "flex", alignItems: "center", color: "var(--text-muted)", fontSize: "var(--text-sm)" }}>No measurements in this window</div>;
   const w = 100, h = 100;
   const min = Math.min(...values), max = Math.max(...values), span = max - min || 1;
-  const pts = values.map((v, i) => [(i / (values.length - 1)) * w, h - ((v - min) / span) * h] as const);
+  const pts = values.map((v, i) => [(i / Math.max(1, values.length - 1)) * w, h - ((v - min) / span) * h] as const);
   const line = pts.map((pt, i) => (i ? "L" : "M") + pt[0].toFixed(2) + " " + pt[1].toFixed(2)).join(" ");
   const area = line + ` L ${w} ${h} L 0 ${h} Z`;
-  const gid = "tg" + React.useId().replace(/:/g, "");
   return (
     <div style={{ position: "relative" }}>
       <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" width="100%" height={height} style={{ display: "block" }}>
@@ -168,7 +182,8 @@ function TrendChart({ values, color, height = 120 }: { values: number[]; color: 
 }
 
 function Columns({ values, color, height = 110, unit }: { values: number[]; color: string; height?: number; unit?: string }) {
-  const max = Math.max(...values);
+  if (!values.length) return <div style={{ height, display: "flex", alignItems: "center", color: "var(--text-muted)", fontSize: "var(--text-sm)" }}>No measurements in this window</div>;
+  const max = Math.max(1, ...values);
   const slice = values.slice(-14);
   return (
     <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height }}>
@@ -184,13 +199,13 @@ function Columns({ values, color, height = 110, unit }: { values: number[]; colo
 
 function TimelineGrid({ p }: { p: Patient }) {
   const sevColor = ["var(--surface-sunken)", "var(--teal-300)", "var(--amber-400)", "var(--red-400)"];
-  const sevLabel = ["none", "mild", "moderate", "severe"];
+  const sevLabel = ["no tracked symptom reported", "mild", "moderate", "severe"];
   return (
     <div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(15, 1fr)", gap: 5 }}>
         {p.timeline.map((sev, i) => (
-          <div key={i} title={`Day ${i + 1}: ${sevLabel[sev]}${p.injectionMarks[i] ? " · injection" : ""}`}
-            style={{ position: "relative", aspectRatio: "1", borderRadius: "var(--radius-xs)", background: sevColor[sev], border: "1px solid rgba(21,26,29,.04)" }}>
+          <div key={i} title={`Day ${i + 1}: ${sev < 0 ? "not recorded" : sevLabel[sev]}${p.injectionMarks[i] ? " · injection" : ""}`}
+            style={{ position: "relative", aspectRatio: "1", borderRadius: "var(--radius-xs)", background: sev < 0 ? "var(--gray-200)" : sevColor[sev], border: "1px solid var(--border-subtle)" }}>
             {p.injectionMarks[i] === 1 && (
               <span style={{ position: "absolute", top: 2, right: 2, width: 4, height: 4, borderRadius: "50%", background: "var(--accent)" }} />
             )}
@@ -209,9 +224,9 @@ function TimelineGrid({ p }: { p: Patient }) {
 
 export function Analytics({ p }: { p: Patient }) {
   const w = p.wearables;
-  const sleepAvg = (w.sleep.reduce((a, b) => a + b, 0) / w.sleep.length).toFixed(1);
-  const rhrAvg = Math.round(w.rhr.reduce((a, b) => a + b, 0) / w.rhr.length);
-  const stepsAvg = Math.round(w.steps.reduce((a, b) => a + b, 0) / w.steps.length / 100) * 100;
+  const sleepAvg = w.sleep.length ? (w.sleep.reduce((a, b) => a + b, 0) / w.sleep.length).toFixed(1) : "Unavailable";
+  const rhrAvg = w.rhr.length ? Math.round(w.rhr.reduce((a, b) => a + b, 0) / w.rhr.length) : "Unavailable";
+  const stepsAvg = w.steps.length ? Math.round(w.steps.reduce((a, b) => a + b, 0) / w.steps.length / 100) * 100 : "Unavailable";
 
   const metric = (label: string, value: React.ReactNode, unit: string) => (
     <div>
@@ -227,10 +242,10 @@ export function Analytics({ p }: { p: Patient }) {
           <MiniBarChart unit=" d" data={p.symptomFreq} />
         </Card>
         <Card eyebrow="Wearable-style metric" title="Weight trend"
-          action={<span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{p.weightStart} → {p.weightEnd} lb</span>}>
+          action={<span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{p.weightStart == null ? "Unavailable" : `${p.weightStart} → ${p.weightEnd} lb`}</span>}>
           <TrendChart values={w.weight} color="var(--viz-teal)" />
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, fontSize: "var(--text-2xs)", color: "var(--text-subtle)" }}>
-            <span>May 14</span><span>Jun 12</span>
+            <span>{p.reviewWindow.split(" – ")[0]}</span><span>{p.reviewEnd}</span>
           </div>
         </Card>
       </div>
@@ -249,7 +264,7 @@ export function Analytics({ p }: { p: Patient }) {
           action={<span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>last 14 days</span>}>
           <div style={{ display: "flex", gap: 24, marginBottom: 10 }}>
             {metric("Steps avg", stepsAvg.toLocaleString(), "/ day")}
-            {metric("Active", Math.round(w.activeMin.reduce((a, b) => a + b, 0) / w.activeMin.length), "min")}
+            {metric("Active", w.activeMin.length ? Math.round(w.activeMin.reduce((a, b) => a + b, 0) / w.activeMin.length) : "Unavailable", "min")}
           </div>
           <Columns values={w.steps} color="var(--viz-teal)" height={84} unit=" steps" />
           <div style={{ height: 10 }} />
@@ -268,8 +283,21 @@ export function Analytics({ p }: { p: Patient }) {
 export function Report({ p }: { p: Patient }) {
   const reportRef = React.useRef<HTMLDivElement>(null);
   const printTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wDelta = (p.weightEnd - p.weightStart).toFixed(1);
-  const report = buildReport(p);
+  const [report, setReport] = React.useState<DoctorReport | null>(null);
+  const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    let active = true;
+    fetch(`/api/v1/patients/${p.id}/reports`, { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ expectedRevision: p.revision ?? 0 }) })
+      .then(async (response) => {
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error?.message ?? "Report generation failed.");
+        return result;
+      })
+      .then((result) => { if (active) setReport(result.report); })
+      .catch((cause) => { if (active) setError(cause instanceof Error ? cause.message : "Report generation failed."); });
+    return () => { active = false; };
+  }, [p.id, p.revision]);
 
   React.useEffect(() => () => {
     if (printTimer.current) clearTimeout(printTimer.current);
@@ -297,7 +325,7 @@ export function Report({ p }: { p: Patient }) {
     win.document.open();
     win.document.write(
       `<!doctype html><html><head><base href="${location.origin}/"><meta charset="utf-8">` +
-        `<title>VisitPrep Report — ${p.name} (${p.id})</title>${heads}` +
+        `<title>VisitPrep Report — ${p.name} (${p.sourceId})</title>${heads}` +
         `<style>html,body{background:var(--surface)!important;margin:0}body{padding:24px}` +
         `@page{margin:14mm}[data-vp-chrome]{display:none!important}</style></head>` +
         `<body>${clone.outerHTML}</body></html>`
@@ -310,7 +338,18 @@ export function Report({ p }: { p: Patient }) {
     if (fonts?.ready) fonts.ready.then(fire);
     else fire();
   }
-  const { prompts, highlights, evidence } = report;
+  if (error) return <Card eyebrow="Doctor report" title="Report unavailable"><p role="alert">{error}</p></Card>;
+  if (!report) return <Card eyebrow="Doctor report" title="Preparing report"><p>Building a source-grounded report…</p></Card>;
+  const snapshot = report.snapshotMetrics;
+  const prompts = report.discussionPrompts;
+  const highlights = report.wearableHighlights.map((item, index) => ({ icon: ["weight", "moon", "heart-pulse", "activity", "activity"][index], label: "Recorded trend", value: item, note: report.dateRange }));
+  const evidenceByNote = report.evidenceNotes.map((item) => (item.signals ?? []).map((signal) => ({
+    signal: signal.symptom,
+    level: signal.severity === "severe" || signal.severity === "moderate" || signal.severity === "mild" ? signal.severity : "none" as const,
+    date: item.date, snippet: item.note, match: signal.matchedText, injectionAdjacent: item.injectionDay
+  })));
+  const evidence = [...evidenceByNote.flatMap((signals) => signals.slice(0, 1)),
+    ...evidenceByNote.flatMap((signals) => signals.slice(1))].slice(0, 6);
 
   return (
     <div ref={reportRef} style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
@@ -323,7 +362,7 @@ export function Report({ p }: { p: Patient }) {
         </span>
         <div>
           <h1 style={{ fontSize: "var(--text-h2)", fontWeight: 700, color: "var(--text-strong)" }}>Doctor-ready visit summary</h1>
-          <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", marginTop: 2 }}>{p.name} · <span style={{ fontFamily: "var(--font-mono)" }}>{p.id}</span> · {p.reviewWindow}</div>
+          <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)", marginTop: 2 }}>{report.patientLabel} · <span style={{ fontFamily: "var(--font-mono)" }}>{p.sourceId}</span> · {report.dateRange}</div>
         </div>
         <div data-vp-chrome style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           <Button variant="secondary" size="md" icon="printer" onClick={handlePrint}>Print</Button>
@@ -335,14 +374,14 @@ export function Report({ p }: { p: Patient }) {
         <Card eyebrow="30-day snapshot" title="At a glance">
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             {([
-              ["Top symptom", p.topSymptoms[0], p.symptomFreq[0].value + " of 30 days"],
-              ["Injection days", p.injectionDays, "in window"],
-              ["Weight change", wDelta + " lb", "30 days"],
-              ["Moderate+ days", p.moderateDays + " / 30", "patient-reported"]
+              ["Top symptom", report.symptomHighlights[0]?.name ?? "None reported", (report.symptomHighlights[0]?.count ?? 0) + ` of ${snapshot?.reviewDays ?? 30} days`],
+              ["Injection days", snapshot?.injectionDays ?? "Unavailable", "in window"],
+              ["Weight change", snapshot?.weightChangeLb == null ? "Unavailable" : `${snapshot.weightChangeLb} lb`, "30 days"],
+              ["Moderate+ days", snapshot ? `${snapshot.moderateOrSevereDays} / ${snapshot.reviewDays}` : "Unavailable", "patient-reported"]
             ] as const).map((row, i) => (
               <div key={i} style={{ padding: "10px 12px", background: "var(--surface-sunken)", borderRadius: "var(--radius-md)" }}>
                 <div style={{ fontSize: "var(--text-2xs)", textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--text-muted)", fontWeight: 600 }}>{row[0]}</div>
-                <div style={{ fontSize: 17, fontWeight: 700, color: "var(--text-strong)", textTransform: "capitalize", marginTop: 2, fontVariantNumeric: "tabular-nums" }}>{row[1]}</div>
+                <div style={{ fontSize: 17, fontWeight: 700, color: "var(--text-strong)", textTransform: i === 0 ? "capitalize" : "none", marginTop: 2, fontVariantNumeric: "tabular-nums" }}>{row[1]}</div>
                 <div style={{ fontSize: "var(--text-2xs)", color: "var(--text-subtle)" }}>{row[2]}</div>
               </div>
             ))}
@@ -363,7 +402,7 @@ export function Report({ p }: { p: Patient }) {
             </div>
             <div style={{ height: 1, background: "var(--border-subtle)" }} />
             <div style={{ fontSize: "var(--text-xs)", color: "var(--text-muted)", lineHeight: 1.5, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-              Symptom signals marked <Badge tone="accent" icon="syringe">injection-adjacent</Badge> occurred within 48 h of a recorded injection.
+              Symptom signals marked <Badge tone="accent" icon="syringe">injection-adjacent</Badge> overlapped with documented injection context.
             </div>
           </div>
         </Card>
@@ -431,7 +470,7 @@ function RailPanel({ eyebrow, icon, children }: { eyebrow: string; icon: string;
 }
 
 export function RightRail({ p }: { p: Patient }) {
-  const { prompts } = buildReport(p);
+  const prompts = p.reportPrompts ?? [];
   const checks = [
     { label: "Review window set", done: true },
     { label: "Journal notes recorded", done: true, meta: p.notes.length + " notes" },
@@ -478,7 +517,7 @@ export function RightRail({ p }: { p: Patient }) {
           {p.symptomFreq.slice(0, 4).map((s, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "var(--text-sm)" }}>
               <span style={{ textTransform: "capitalize", color: "var(--text-body)", fontWeight: 500 }}>{s.label}</span>
-              <span style={{ marginLeft: "auto", fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{s.value} note{s.value > 1 ? "s" : ""}</span>
+              <span style={{ marginLeft: "auto", fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>{s.value} day{s.value > 1 ? "s" : ""}</span>
             </div>
           ))}
           <div style={{ marginTop: 4, paddingTop: 10, borderTop: "1px solid var(--border-subtle)", fontSize: "var(--text-2xs)", color: "var(--text-subtle)" }}>
@@ -508,7 +547,7 @@ export function Patients({ patients, activeId, onSelect }: { patients: Patient[]
             <div style={{ minWidth: 0 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ fontSize: "var(--text-body-lg)", fontWeight: 600, color: "var(--text-strong)" }}>{p.name}</span>
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--text-muted)" }}>{p.id}</span>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--text-muted)" }}>{p.sourceId}</span>
               </div>
               <div style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)" }}>{p.med} · {p.dose}</div>
             </div>
@@ -523,19 +562,25 @@ export function Patients({ patients, activeId, onSelect }: { patients: Patient[]
   );
 }
 
-export function Journal({ p, onAddNote }: { p: Patient; onAddNote: (note: Note) => void }) {
+export function Journal({ p, onAddNote, draft, onDraftChange }: { p: Patient; onAddNote: SaveNote; draft: string; onDraftChange: (value: string) => void }) {
   const [composing, setComposing] = React.useState(false);
-  const [text, setText] = React.useState("");
   const [inj, setInj] = React.useState(false);
-  const [date, setDate] = React.useState(TODAY);
+  const [date, setDate] = React.useState(p.reviewEnd ?? TODAY);
+  const [busy, setBusy] = React.useState(false);
+  const [error, setError] = React.useState("");
+  const saveRequest = React.useRef<{ content: string; id: string } | null>(null);
 
-  function save() {
-    if (!text.trim()) return;
-    onAddNote(createNote(text, inj, date));
-    setText("");
-    setInj(false);
-    setDate(TODAY);
-    setComposing(false);
+  async function save() {
+    if (!draft.trim()) return;
+    setBusy(true); setError("");
+    const content = JSON.stringify({ text: draft.trim(), date, injection: inj });
+    if (saveRequest.current?.content !== content) saveRequest.current = { content, id: crypto.randomUUID() };
+    try {
+      await onAddNote({ text: draft.trim(), date, injection: inj, clientRequestId: saveRequest.current.id });
+      saveRequest.current = null;
+      onDraftChange(""); setInj(false); setDate(p.reviewEnd ?? TODAY); setComposing(false);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "Note could not be saved."); }
+    finally { setBusy(false); }
   }
 
   return (
@@ -560,13 +605,14 @@ export function Journal({ p, onAddNote }: { p: Patient; onAddNote: (note: Note) 
                 <Toggle label="Injection day" checked={inj} onChange={setInj} />
               </div>
             </div>
-            <Textarea rows={3} value={text} onChange={(e) => setText(e.target.value)}
+            <Textarea rows={3} value={draft} onChange={(e) => onDraftChange(e.target.value)}
               placeholder="How did you feel today? Note symptoms, appetite, sleep, injection context…"
               hint="Signals are extracted locally on save and traced back to your words." />
             <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
-              <Button variant="primary" icon="plus" onClick={save} disabled={!text.trim() || !date}>Save note</Button>
+              <Button variant="primary" icon="plus" onClick={save} disabled={busy || !draft.trim() || !date}>Save note</Button>
               <Button variant="ghost" onClick={() => setComposing(false)}>Cancel</Button>
             </div>
+            {error && <div role="alert" style={{ color: "var(--danger-text)", fontSize: "var(--text-sm)", marginTop: 8 }}>{error}</div>}
           </div>
         )}
         <div>

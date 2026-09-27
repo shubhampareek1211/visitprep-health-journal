@@ -30,6 +30,8 @@ export type ExtractedClinicalSignal = {
   severity: SymptomSeverity;
   evidenceText: string;
   matchedText: string;
+  matchedStart: number;
+  matchedEnd: number;
   evidenceStart: number;
   evidenceEnd: number;
   assertionStatus: ClinicalAssertionStatus;
@@ -76,6 +78,9 @@ export type PatientAnalyticsSummary = {
   patientId: string;
   entryCount: number;
   signalCount: number;
+  uncertainSignalCount: number;
+  symptomDayFrequency: CountByName[];
+  moderateOrSevereDays: number;
   symptomFrequency: CountByName[];
   categoryFrequency: CountByName[];
   topSymptoms: CountByName[];
@@ -92,6 +97,7 @@ export type ReportEvidenceNote = {
   symptoms: string[];
   injectionDay: boolean;
   doseChangeDay: boolean;
+  signals?: Array<{ symptom: string; severity: SymptomSeverity; matchedText: string }>;
 };
 
 export type DoctorReport = {
@@ -100,6 +106,12 @@ export type DoctorReport = {
   dateRange: string;
   syntheticDataNotice: string;
   snapshot: string[];
+  snapshotMetrics?: {
+    reviewDays: number;
+    injectionDays: number;
+    moderateOrSevereDays: number;
+    weightChangeLb: number | null;
+  };
   medicationContext: string[];
   symptomHighlights: CountByName[];
   wearableHighlights: string[];

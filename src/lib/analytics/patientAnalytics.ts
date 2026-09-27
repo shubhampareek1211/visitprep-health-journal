@@ -25,22 +25,34 @@ export function buildPatientAnalyticsSummary(
   entries: JournalEntry[]
 ): PatientAnalyticsSummary {
   const signals = extractClinicalSignalsForEntries(entries);
+  const present = signals.filter((signal) => signal.assertionStatus === "present");
+  const symptomDays = new Map<string, Set<string>>();
+  for (const signal of present) {
+    const days = symptomDays.get(signal.symptom) ?? new Set<string>();
+    days.add(signal.date);
+    symptomDays.set(signal.symptom, days);
+  }
+  const symptomDayFrequency = [...symptomDays].map(([name, dates]) => ({ name, count: dates.size }))
+    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name));
 
   return {
     patientId,
     entryCount: entries.length,
-    signalCount: signals.length,
-    symptomFrequency: countBy(signals, (signal) => signal.symptom),
-    categoryFrequency: countBy(signals, (signal) => signal.category),
-    topSymptoms: countBy(signals, (signal) => signal.symptom).slice(0, 5),
+    signalCount: present.length,
+    uncertainSignalCount: signals.filter((signal) => signal.assertionStatus === "uncertain").length,
+    symptomDayFrequency,
+    moderateOrSevereDays: new Set(present.filter((signal) => signal.severity === "moderate" || signal.severity === "severe").map((signal) => signal.date)).size,
+    symptomFrequency: countBy(present, (signal) => signal.symptom),
+    categoryFrequency: countBy(present, (signal) => signal.category),
+    topSymptoms: symptomDayFrequency.slice(0, 5),
     injectionAdjacentSymptomFrequency: countBy(
-      signals.filter((signal) => signal.relatedToInjection),
+      present.filter((signal) => signal.relatedToInjection),
       (signal) => signal.symptom
     ),
-    injectionAdjacentSignalCount: signals.filter(
+    injectionAdjacentSignalCount: present.filter(
       (signal) => signal.relatedToInjection
     ).length,
-    severityDistribution: buildSeverityDistribution(signals),
+    severityDistribution: buildSeverityDistribution(present),
     wearableTrends: buildWearableTrendSummary(entries)
   };
 }

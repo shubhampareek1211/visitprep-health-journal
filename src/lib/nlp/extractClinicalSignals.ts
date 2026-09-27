@@ -25,7 +25,6 @@ type CandidateMatch = {
   matchStart: number;
   matchEnd: number;
   sentence: SentenceSpan;
-  noteText: string;
 };
 
 type ExtractionOptions = {
@@ -49,14 +48,14 @@ const severityPhrases: Array<{
   reason: string;
 }> = [
   {
-    severity: "moderate",
-    phrases: ["not awful but enough", "vomited", "vomiting", "threw up", "wiped out"],
-    reason: "moderate phrase in evidence sentence"
-  },
-  {
     severity: "severe",
     phrases: ["severe", "awful", "couldn't keep", "could not keep", "worst", "intense"],
     reason: "severe phrase in evidence sentence"
+  },
+  {
+    severity: "moderate",
+    phrases: ["vomited", "vomiting", "threw up", "wiped out"],
+    reason: "moderate phrase in evidence clause"
   },
   {
     severity: "mild",
@@ -156,7 +155,7 @@ export function extractClinicalSignalsForEntries(
 }
 
 export function isActionableClinicalSignal(signal: ExtractedClinicalSignal) {
-  return signal.assertionStatus !== "absent";
+  return signal.assertionStatus === "present";
 }
 
 function buildSignal(
@@ -178,6 +177,8 @@ function buildSignal(
     severity: severity.severity,
     evidenceText: match.sentence.text,
     matchedText: match.matchedText,
+    matchedStart: match.matchStart,
+    matchedEnd: match.matchEnd,
     evidenceStart: match.sentence.start,
     evidenceEnd: match.sentence.end,
     assertionStatus,
@@ -191,37 +192,33 @@ function buildSignal(
 }
 
 function findSymptomMatches(sentenceSpans: SentenceSpan[]): CandidateMatch[] {
-  const bestBySymptom = new Map<string, CandidateMatch>();
+  const candidates: CandidateMatch[] = [];
 
   for (const sentence of sentenceSpans) {
     for (const symptom of symptomDictionary) {
       for (const alias of normalizeAliases(symptom)) {
-        const match = findAliasInSentence(sentence, alias);
-        if (!match) {
-          continue;
-        }
-
-        const candidate: CandidateMatch = {
-          symptom,
-          alias,
-          matchedText: match.text,
-          matchStart: match.start,
-          matchEnd: match.end,
-          sentence,
-          noteText: sentenceSpans.map((span) => span.text).join(" ")
-        };
-
-        const current = bestBySymptom.get(symptom.name);
-        if (!current || rankCandidate(candidate) > rankCandidate(current)) {
-          bestBySymptom.set(symptom.name, candidate);
+        for (const match of findAliasesInSentence(sentence, alias)) {
+          candidates.push({
+            symptom,
+            alias,
+            matchedText: match.text,
+            matchStart: match.start,
+            matchEnd: match.end,
+            sentence
+          });
         }
       }
     }
   }
 
-  return [...bestBySymptom.values()].sort(
-    (left, right) => left.matchStart - right.matchStart
-  );
+  const selected: CandidateMatch[] = [];
+  for (const candidate of candidates.sort((a, b) => rankCandidate(b) - rankCandidate(a))) {
+    if (!selected.some((existing) => existing.symptom.name === candidate.symptom.name &&
+      candidate.matchStart < existing.matchEnd && candidate.matchEnd > existing.matchStart)) {
+      selected.push(candidate);
+    }
+  }
+  return selected.sort((left, right) => left.matchStart - right.matchStart);
 }
 
 function normalizeAliases(symptom: SymptomDefinition): AliasDefinition[] {
@@ -230,19 +227,16 @@ function normalizeAliases(symptom: SymptomDefinition): AliasDefinition[] {
   );
 }
 
-function findAliasInSentence(sentence: SentenceSpan, alias: AliasDefinition) {
-  const pattern = phraseBoundaryRegex(alias.term);
-  const match = pattern.exec(sentence.text);
-  if (!match) {
-    return null;
+function findAliasesInSentence(sentence: SentenceSpan, alias: AliasDefinition) {
+  const pattern = phraseBoundaryRegex(alias.term, true);
+  const found: Array<{ start: number; end: number; text: string }> = [];
+  for (const match of sentence.text.matchAll(pattern)) {
+    const prefix = match[1] ?? "";
+    const text = match[2] ?? match[0];
+    const start = sentence.start + (match.index ?? 0) + prefix.length;
+    found.push({ start, end: start + text.length, text });
   }
-
-  const prefix = match[1] ?? "";
-  const text = match[2] ?? match[0];
-  const start = sentence.start + match.index + prefix.length;
-  const end = start + text.length;
-
-  return { start, end, text };
+  return found;
 }
 
 function rankCandidate(candidate: CandidateMatch) {
@@ -270,17 +264,17 @@ function assertionStatusRank(status: ClinicalAssertionStatus) {
 
 function detectAssertionStatus(match: CandidateMatch): ClinicalAssertionStatus {
   const before = localWindowBefore(match.sentence.text, match.matchStart - match.sentence.start);
-  const sentence = normalize(match.sentence.text);
-
-  if (hasPhrase(sentence, resolvedPatterns)) {
-    return "resolved";
-  }
+  const clause = normalize(clauseForMatch(match));
 
   if (hasPhrase(normalize(before), absentPatterns)) {
     return "absent";
   }
 
-  if (hasPhrase(sentence, uncertainPatterns)) {
+  if (hasPhrase(clause, resolvedPatterns)) {
+    return "resolved";
+  }
+
+  if (hasPhrase(clause, uncertainPatterns)) {
     return "uncertain";
   }
 
@@ -296,21 +290,15 @@ function detectSeverity(
     return { severity: "none", reason: "negated symptom mention" };
   }
 
-  const normalizedSentence = normalize(match.sentence.text);
-  const normalizedNote = normalize(match.noteText);
+  const normalizedClause = normalize(clauseForMatch(match));
 
-  for (const group of severityPhrases) {
-    if (hasPhrase(normalizedSentence, group.phrases)) {
-      return { severity: group.severity, reason: group.reason };
-    }
+  if (hasPhrase(normalizedClause, ["not awful but enough"])) {
+    return { severity: "moderate", reason: "moderate phrase in evidence clause" };
   }
 
-  for (const group of severityPhrases.filter((group) => group.severity !== "mild")) {
-    if (hasPhrase(normalizedNote, group.phrases)) {
-      return {
-        severity: group.severity,
-        reason: `${group.reason}; applied from nearby journal context`
-      };
+  for (const group of severityPhrases) {
+    if (hasPhrase(normalizedClause, group.phrases)) {
+      return { severity: group.severity, reason: group.reason };
     }
   }
 
@@ -469,9 +457,18 @@ function lastClauseBoundaryEnd(sentence: string, beforeIndex: number) {
   return lastEnd;
 }
 
-function phraseBoundaryRegex(phrase: string) {
+function clauseForMatch(match: CandidateMatch) {
+  const sentence = match.sentence.text;
+  const offset = match.matchStart - match.sentence.start;
+  const start = lastClauseBoundaryEnd(sentence, offset);
+  clauseBoundaryRegex.lastIndex = offset;
+  const next = clauseBoundaryRegex.exec(sentence);
+  return sentence.slice(start, next?.index ?? sentence.length);
+}
+
+function phraseBoundaryRegex(phrase: string, global = false) {
   const escaped = escapeRegExp(phrase.trim()).replace(/ /g, "\\s+");
-  return new RegExp(`(^|[^a-zA-Z0-9])(${escaped})(?=$|[^a-zA-Z0-9])`, "i");
+  return new RegExp(`(^|[^a-zA-Z0-9])(${escaped})(?=$|[^a-zA-Z0-9])`, global ? "gi" : "i");
 }
 
 function hasPhrase(normalizedText: string, phrases: string[]) {

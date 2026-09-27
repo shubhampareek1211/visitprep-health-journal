@@ -3,8 +3,19 @@
 import React from "react";
 import Image from "next/image";
 import { Badge, Icon } from "@/components/ds";
-import { Analytics, Evidence, Journal, Overview, Patients, Report, RightRail } from "@/components/visitprep/screens";
-import { applyNote, VP_DATA, type Note, type Patient } from "@/lib/visitprep/data";
+import { Analytics, Evidence, Journal, Overview, Patients, Report, RightRail, type NoteInput } from "@/components/visitprep/screens";
+import type { Patient } from "@/lib/visitprep/data";
+import { fromServer } from "@/lib/visitprep/fromServer";
+
+class ApiError extends Error {
+  constructor(message: string, public status: number) { super(message); }
+}
+
+async function jsonResponse(response: Response) {
+  const result = await response.json();
+  if (!response.ok) throw new ApiError(result.error?.message ?? "VisitPrep could not load this request.", response.status);
+  return result;
+}
 
 type NavId = "overview" | "patients" | "journal" | "evidence" | "analytics" | "report";
 
@@ -55,7 +66,7 @@ function Sidebar({ active, onNavigate }: { active: NavId; onNavigate: (id: NavId
           <Icon name="database" size={15} style={{ color: "var(--text-muted)", flex: "none", marginTop: 1 }} />
           <div>
             <div style={{ fontSize: "var(--text-xs)", fontWeight: 600, color: "var(--text-strong)" }}>Synthetic data only</div>
-            <div style={{ fontSize: "var(--text-2xs)", color: "var(--text-muted)", lineHeight: 1.4, marginTop: 1 }}>Local deterministic extraction · no network calls</div>
+            <div style={{ fontSize: "var(--text-2xs)", color: "var(--text-muted)", lineHeight: 1.4, marginTop: 1 }}>Server-side deterministic extraction · isolated demo</div>
           </div>
         </div>
       </div>
@@ -92,7 +103,7 @@ function Topbar({
           }}>{active.initials}</span>
           <span style={{ textAlign: "left" }}>
             <span style={{ display: "block", fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text-strong)", lineHeight: 1.2 }}>{active.name}</span>
-            <span style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--text-muted)" }}>{active.id}</span>
+            <span style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--text-muted)" }}>{active.sourceId}</span>
           </span>
           <Icon name="chevrons-up-down" size={15} style={{ color: "var(--text-muted)" }} />
         </button>
@@ -151,25 +162,64 @@ function Topbar({
 
 export function Workspace() {
   const [nav, setNav] = React.useState<NavId>("overview");
-  // Notes are mutable so "Save note" / "Add note" append to the timeline.
-  const [patients, setPatients] = React.useState<Patient[]>(() =>
-    VP_DATA.patients.map((pt) => ({ ...pt, notes: [...pt.notes] }))
-  );
-  const [pid, setPid] = React.useState(patients[0].id);
-  const p = patients.find((x) => x.id === pid)!;
+  const [patients, setPatients] = React.useState<Patient[]>([]);
+  const [pid, setPid] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState("");
+  const [expired, setExpired] = React.useState(false);
+  const [overviewDraft, setOverviewDraft] = React.useState("Felt nauseous after the injection and very tired by the afternoon. Couldn't sleep well.");
+  const [journalDraft, setJournalDraft] = React.useState("");
+  const started = React.useRef(false);
+  const p = patients.find((x) => x.id === pid) ?? patients[0];
   const showRail = nav === "overview" || nav === "analytics";
 
-  const addNote = React.useCallback((patientId: string, note: Note) => {
-    setPatients((prev) => prev.map((pt) => (pt.id === patientId ? applyNote(pt, note) : pt)));
+  const loadWorkspace = React.useCallback(async () => {
+    setLoading(true); setError("");
+    try {
+      await jsonResponse(await fetch("/api/v1/demo-sessions", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: "{}" }));
+      const overview = await jsonResponse(await fetch("/api/v1/workspace", { credentials: "same-origin", cache: "no-store" }));
+      const views = await Promise.all(overview.patients.map(async (patient: { id: string }) =>
+        jsonResponse(await fetch(`/api/v1/patients/${patient.id}`, { credentials: "same-origin", cache: "no-store" }))));
+      const loaded = views.map(fromServer);
+      setPatients(loaded);
+      setPid((old) => loaded.some((item: Patient) => item.id === old) ? old : loaded[0]?.id ?? "");
+      setExpired(false);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "VisitPrep could not load."); }
+    finally { setLoading(false); }
   }, []);
 
+  React.useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    void loadWorkspace();
+  }, [loadWorkspace]);
+
+  const addNote = React.useCallback(async (patientId: string, note: NoteInput) => {
+    const response = await fetch(`/api/v1/patients/${patientId}/journal-entries`, {
+      method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clientRequestId: note.clientRequestId, date: note.date, note: note.text, injectionDay: note.injection })
+    });
+    try { await jsonResponse(response); }
+    catch (cause) {
+      if (cause instanceof ApiError && cause.status === 401) setExpired(true);
+      throw cause;
+    }
+    try {
+      const updated = fromServer(await jsonResponse(await fetch(`/api/v1/patients/${patientId}`, { credentials: "same-origin", cache: "no-store" })));
+      setPatients((current) => current.map((item) => item.id === patientId ? updated : item));
+    } catch { setError("The note was saved. Refresh the page to see the latest summary."); }
+  }, []);
+
+  if (loading) return <div style={{ padding: "var(--space-6)", color: "var(--text-body)" }}>Loading synthetic workspace…</div>;
+  if (!p) return <div style={{ padding: "var(--space-6)", color: "var(--text-body)" }} role="alert">{error || "Workspace unavailable."} <button onClick={loadWorkspace}>Retry</button></div>;
+
   let screen: React.ReactNode = null;
-  if (nav === "overview") screen = <Overview key={pid} p={p} onAddNote={(note) => addNote(p.id, note)} />;
+  if (nav === "overview") screen = <Overview key={pid} p={p} draft={overviewDraft} onDraftChange={setOverviewDraft} onAddNote={(note) => addNote(p.id, note)} />;
   else if (nav === "patients") screen = <Patients patients={patients} activeId={pid} onSelect={(id) => { setPid(id); setNav("overview"); }} />;
-  else if (nav === "journal") screen = <Journal key={pid} p={p} onAddNote={(note) => addNote(p.id, note)} />;
+  else if (nav === "journal") screen = <Journal key={pid} p={p} draft={journalDraft} onDraftChange={setJournalDraft} onAddNote={(note) => addNote(p.id, note)} />;
   else if (nav === "evidence") screen = <Evidence p={p} />;
   else if (nav === "analytics") screen = <Analytics p={p} />;
-  else if (nav === "report") screen = <Report p={p} />;
+  else if (nav === "report") screen = <Report key={`${pid}-${p.revision}`} p={p} />;
 
   return (
     <div data-vp-shell style={{ display: "flex", height: "100vh", overflow: "hidden", background: "var(--canvas)" }}>
@@ -179,6 +229,8 @@ export function Workspace() {
         <div data-vp-scroll style={{ flex: 1, overflow: "auto" }}>
           <div style={{ maxWidth: showRail ? 1280 : "var(--content-max)", margin: "0 auto", padding: "20px 24px 40px", display: "flex", gap: 18, alignItems: "flex-start" }}>
             <main style={{ flex: 1, minWidth: 0 }}>
+              {error && <div role="alert" style={{ padding: "var(--space-3)", marginBottom: "var(--space-3)", background: "var(--caution-tint)", color: "var(--caution-text)", borderRadius: "var(--radius-md)" }}>{error} <button onClick={loadWorkspace}>Refresh</button></div>}
+              {expired && <div role="alert" style={{ padding: "var(--space-3)", marginBottom: "var(--space-3)", background: "var(--caution-tint)", color: "var(--caution-text)", borderRadius: "var(--radius-md)" }}>This demo session expired. Your draft text will remain here while you start a new demo; review its date and patient before saving. <button onClick={loadWorkspace}>Start new demo</button></div>}
               <div data-vp-chrome style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                 <h2 style={{ fontSize: "var(--text-h2)", fontWeight: 700, color: "var(--text-strong)" }}>{NAV_ITEMS.find((i) => i.id === nav)!.label}</h2>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "var(--text-xs)", color: "var(--text-subtle)" }}>

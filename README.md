@@ -1,142 +1,170 @@
-# VisitPrep — Clinical Natural Language Technology for Health Care
+# VisitPrep
 
-**Cotiviti Intern Assessment · Topic 1: Clinical Natural Language Technology (Past, Present & Future — NLP, OCR, Computer Vision, LLM, LMM)**
+[![CI](https://github.com/shubhampareek1211/visitprep-health-journal/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shubhampareek1211/visitprep-health-journal/actions/workflows/ci.yml)
 
-VisitPrep is a proof-of-concept web application that demonstrates the clinical-NLP value chain end to end:
+VisitPrep is a personal project exploring how free-text health journal entries and wearable-style measurements can be organized into traceable symptom signals, trends, and a concise visit summary.
 
+The application demonstrates a source-first pipeline:
+
+```text
+journal entry → extracted signals → analytics → saved report snapshot
 ```
-Unstructured patient note  →  structured symptom signals  →  trend analytics  →  doctor-ready summary
+
+It currently uses synthetic GLP-1 journal data. Signal extraction is deterministic and runs on the application server. Every signal keeps its matched text and evidence span so a reader can inspect where a summary came from.
+
+![VisitPrep overview](docs/screenshots/overview.png)
+
+## Features
+
+- Synthetic patient workspaces with separate, expiring sessions.
+- Server-side symptom extraction with assertion, severity, and evidence spans.
+- Journal entry validation, transactional persistence, and idempotent retries.
+- Rolling-window analytics with distinct symptom-day counts and missing wearable data represented explicitly.
+- Revision-checked, immutable report snapshots with source-note evidence.
+- Same-origin API routes, request limits, health checks, request IDs, and expired-session cleanup.
+- PostgreSQL migrations, automated tests, and GitHub Actions CI.
+
+## Technology
+
+- Next.js App Router, React, and TypeScript
+- PostgreSQL 16 or newer, Drizzle ORM, and Drizzle Kit
+- Vitest for unit and database integration tests
+- Deterministic TypeScript NLP rules; no external AI API is used
+
+## Requirements
+
+- Node.js 22.x and npm
+- PostgreSQL 16+
+
+## Run locally
+
+1. Clone the repository and install dependencies:
+
+   ```bash
+   git clone https://github.com/shubhampareek1211/visitprep-health-journal.git
+   cd visitprep-health-journal
+   npm ci
+   ```
+
+2. Create local development and test databases. For a local PostgreSQL installation, for example:
+
+   ```bash
+   createdb visitprep_dev
+   createdb visitprep_test
+   ```
+
+3. Copy `.env.example` to `.env.local` and set the database URLs and a random cron secret. A typical local setup is:
+
+   ```dotenv
+   DATABASE_URL=postgres://localhost/visitprep_dev
+   TEST_DATABASE_URL=postgres://localhost/visitprep_test
+   CRON_SECRET=replace-with-a-long-random-secret
+   ```
+
+   Use credentials and connection strings appropriate for your PostgreSQL installation. Keep `.env.local` private; it is ignored by Git.
+
+4. Apply the database migration and start the development server:
+
+   ```bash
+   npm run db:migrate
+   npm run dev
+   ```
+
+   Visit [http://localhost:3000](http://localhost:3000). The first visit creates an isolated synthetic workspace. The app does not automatically create a missing database; create it before migrating.
+
+## Common commands
+
+```bash
+npm run dev           # Start the local development server
+npm run build         # Create a production build
+npm run start         # Serve a production build
+npm run lint          # Run ESLint
+npm run typecheck     # Run TypeScript checks
+npm test              # Run unit and configured integration tests
+npm run nlp:evaluate  # Evaluate extraction on the curated synthetic set
+npm run db:generate   # Generate a migration from schema changes
+npm run db:migrate    # Apply pending database migrations
 ```
 
-It turns a patient's free-text daily health notes and wearable-style telemetry into **structured, source-grounded, auditable** clinical signals and a concise pre-visit summary a clinician can review. The initial use case is a patient tracking **GLP-1 / weight-loss injection** side effects (nausea, vomiting, fatigue, appetite, sleep, weight, resting heart rate, activity).
+To run the PostgreSQL integration tests, configure `TEST_DATABASE_URL` to point to a **disposable test database**. The tests create and remove synthetic workspaces. Apply migrations to that database first:
 
-> **Design thesis:** In regulated healthcare, the winning pattern is *hybrid and provenance-first* — deterministic, auditable extraction where every downstream number can be traced back to a specific patient phrase, with neural methods layered in behind the same interfaces without losing the audit trail.
+```bash
+DATABASE_URL="$TEST_DATABASE_URL" npm run db:migrate
+npm test
+```
 
----
+Never point the test database setting at production.
 
-## Screenshots
+## Project layout
 
-### Overview — journal capture + live signal extraction
-Patient-reported notes are the source; symptom signals are extracted locally and traced back to the exact phrase. KPI cards, report-readiness, discussion prompts, and a persistent safety boundary frame the workspace.
+```text
+src/app/                 Next.js pages and API routes
+src/components/          Workspace and design-system components
+src/lib/nlp/             Symptom dictionary and deterministic extraction
+src/lib/server/          Database schema, contracts, and repository services
+src/lib/analytics/       Analytics helpers and tests
+src/types/               Shared domain types
+data/synthetic/          Synthetic journal dataset
+drizzle/                 Versioned PostgreSQL migrations
+scripts/                 NLP evaluation tooling
+design-system/           UI tokens and component references
+docs/screenshots/        Application screenshots
+```
 
-![VisitPrep Overview](docs/screenshots/overview.png)
+## API overview
 
-### Journal — per-note timeline with extracted signals
-Each patient note is shown with the symptom signals extracted from it, color-coded by severity, plus injection-day and "severe reported" markers — making the raw evidence behind every downstream metric browsable at a glance.
+The versioned API is under `/api/v1`:
 
-![VisitPrep Journal](docs/screenshots/journal.png)
+| Endpoint | Purpose |
+| --- | --- |
+| `POST /api/v1/demo-sessions` | Start or resume a synthetic demo session |
+| `GET /api/v1/workspace` | List patients in the current workspace |
+| `GET /api/v1/patients/:id` | Fetch a patient view and analytics |
+| `POST /api/v1/patients/:id/journal-entries` | Save a journal entry |
+| `POST /api/v1/extractions/preview` | Preview extracted signals without saving |
+| `POST /api/v1/patients/:id/reports` | Create or return a report snapshot |
+| `GET /api/v1/reports/:id` | Fetch a saved report snapshot |
 
-### Doctor Report — source-grounded, doctor-ready summary
-A 30-day snapshot, GLP-1 medication context with injection-adjacency, wearable telemetry, discussion prompts, and **selected source evidence with the matched phrase highlighted** — every claim is traceable to a note.
+Operational endpoints: `/api/health/live` reports process availability, `/api/health/ready` checks database connectivity, and `/api/internal/cleanup` removes expired workspaces when called with the configured cron authorization header.
 
-![VisitPrep Doctor Report](docs/screenshots/doctor-report.png)
+## Continuous integration
 
-### Analytics — symptom frequency, severity & wearable trends
-Symptom frequency, weight trend, sleep / resting-heart-rate, steps / active minutes, and a symptom-severity timeline — all computed deterministically from the extracted signals.
+GitHub Actions runs on pushes and pull requests. It provisions PostgreSQL, installs the lockfile with `npm ci`, applies migrations, and runs lint, type checking, unit and integration tests, the NLP evaluation, and a production build.
 
-![VisitPrep Analytics](docs/screenshots/analytics.png)
+Before opening a pull request, run:
 
----
+```bash
+npm run lint
+npm run typecheck
+TEST_DATABASE_URL=postgres://... npm test
+npm run nlp:evaluate
+npm run build
+```
 
-## Why this matters for Cotiviti
+For repository maintainers: require the `verify` workflow to pass in branch protection before merging to `main`. Dependabot keeps npm packages and GitHub Actions dependencies under review.
 
-Roughly **80% of clinical data is unstructured** text. The same hybrid, provenance-first extraction demonstrated here maps directly onto Cotiviti's core lines of business:
+## Deployment notes
 
-- **Risk adjustment (HCC):** surface supported / unsupported diagnosis evidence from charts.
-- **Payment integrity / clinical validation:** validate claims against the actual documentation at scale.
-- **Quality measurement (HEDIS-style):** extract numerator/denominator evidence that structured claims miss.
+The repository includes a daily cleanup schedule for Vercel in `vercel.json`. A hosted deployment also needs a managed PostgreSQL database, `DATABASE_URL`, and a strong `CRON_SECRET`. Apply migrations as a controlled deployment step before serving code that depends on them. Configure edge rate limits for unauthenticated session creation and verify backup, restore, monitoring, and rollback procedures with your hosting provider.
 
-Because every signal carries a visible source span, the outputs are **auditable and defensible** — the property black-box generative models struggle to provide. See the full write-up in the report under `deliverables/`.
+The repository does not include hosting credentials or provision cloud infrastructure. Configure a deployment target and its required secrets in that provider before enabling automatic production deploys.
 
----
+## Evaluation and limitations
 
-## Architecture
-
-Four layers, with the **auditable NLP kept fully separate from presentation**:
-
-| Layer | Location | Responsibility |
-|------|----------|----------------|
-| **Data** | `src/lib/syntheticDataset.ts`, `src/types/health.ts` | Typed `JournalEntry` + `WearableMetrics`; synthetic JSON only (no PHI). Wearable data kept separate from journal text. |
-| **NLP extraction** | `src/lib/nlp/` | Deterministic, rule-based, auditable: symptom dictionary, assertion/negation detection, severity phrases, temporal + injection context, evidence spans, confidence scores. |
-| **Analytics** | `src/lib/analytics/` | Symptom frequency, category mix, severity distribution, injection-adjacent analysis, wearable trends. |
-| **Report** | `src/lib/report/` | Template-based doctor summary built from computed data (never from live UI state), with safety disclaimer and traceable evidence. |
-
-### NLP extraction in detail (`src/lib/nlp/`)
-
-- **Dictionary:** 14 symptoms across 7 categories (GI, energy, mood, cardio, sleep, appetite, other) with weighted aliases.
-- **Assertion detection:** `present` / `absent` / `uncertain` / `resolved`, negation- and hedge-aware.
-- **Clause-aware negation:** *"No vomiting since breakfast, **but** I vomited after lunch"* correctly extracts vomiting as **present** — negation scope stops at clause boundaries (`but`, `however`, `,`, `;`).
-- **Severity** phrase detection (mild / moderate / severe) with self-rating fallback.
-- **Temporal + injection context** tagging (e.g., a symptom within 48h of an injection).
-- **Evidence span + confidence** on every signal — provenance-first. `extractionMethod` is typed for `rule-based` today and `semantic-local` / `hybrid` later.
-
-### Evaluation
-
-A deterministic eval harness scores extraction against annotated synthetic data:
+The evaluator checks the curated synthetic dataset for symptom labels, severity, injection context, and evidence spans:
 
 ```bash
 npm run nlp:evaluate
 ```
 
-On the curated synthetic set (**150 entries / 156 signals**): Precision **1.00**, Recall **1.00**, F1 **1.00**, severity accuracy **0.94**, evidence-span coverage **1.00**, negation false positives **0**.
+The rules were developed against synthetic examples, so perfect results on this dataset do not show that extraction generalizes to real clinical text. Broader evaluation needs independently annotated data and careful review. This application is an educational software project, not a medical device or clinical decision support system. It does not diagnose, recommend treatment, determine causality, or perform emergency triage. **Use synthetic data only; do not enter real patient information.**
 
-> **Honesty caveat:** these numbers are on a curated synthetic dataset the rules were tuned against. They demonstrate that the pipeline is *correct*, not that it generalizes to real-world charts.
+## Contributing
 
----
+1. Create a focused branch from `main`.
+2. Keep data synthetic and preserve evidence provenance in extraction changes.
+3. Add or update tests for behavior changes.
+4. Run the checks listed above.
+5. Open a pull request with a concise summary, verification results, and any migration or operational notes.
 
-## Safety boundaries
-
-VisitPrep organizes, summarizes, and visualizes patient-reported data. It **does not** diagnose, determine causality, recommend treatment or medication changes, or perform emergency triage. Generated language is deliberately hedged — *"reported," "overlapped with," "may be useful to discuss"* — never *"caused by"* or *"diagnosed as."* All data in this repo is **synthetic**; there are **no external LLM/API calls** in the MVP.
-
----
-
-## Tech stack
-
-- **Next.js** (App Router) · **React** · **TypeScript**
-- **Recharts** for data visualization
-- **VisitPrep design system** — calm clinical SaaS: teal accent, cool-gray neutrals, Public Sans + IBM Plex Mono, no gradients/emoji (`design-system/`)
-- Local JSON data · deterministic rule-based NLP · **no external AI APIs**
-
----
-
-## Getting started
-
-```bash
-npm install
-npm run dev          # http://localhost:3000
-npm run nlp:evaluate # run the NLP evaluation harness
-npm run build        # production build
-```
-
----
-
-## Repository layout
-
-```
-src/
-  app/                  # Next.js entry + global styles
-  components/           # VisitPrep workspace UI (overview, journal, analytics, doctor report)
-  lib/
-    nlp/                # deterministic clinical NLP extraction (+ evaluation target)
-    analytics/          # symptom + wearable analytics
-    report/             # doctor-ready summary generation
-  types/                # explicit, typed data models
-data/synthetic/         # synthetic patient journals (no PHI)
-design-system/          # VisitPrep design tokens + component references
-scripts/evaluate_nlp.ts # NLP evaluation harness
-deliverables/           # assessment report (.docx) + slide deck (.pptx)
-docs/screenshots/       # application screenshots (this README)
-```
-
----
-
-## Assessment deliverables
-
-Located in `deliverables/`:
-
-- **`VisitPrep_Clinical_NLP_Report.docx`** — 2-page technical report in Word (two-column research-paper format: abstract, introduction, background, system design, evaluation, limitations, references).
-- **`VisitPrep_Clinical_NLP_Report.pdf`** — the same paper typeset with LaTeX (source in `report.tex`).
-- **`VisitPrep_Clinical_NLP_Deck.pptx`** — 12-slide overview of the topic and this POC, styled with the VisitPrep design system.
-- **`VisitPrep_Presentation.mp4`** — recorded presentation of the deck and the working application.
-
-_This POC is a demonstration prototype built for a healthcare-focused technical assessment. It is not a medical device and must not be used for clinical decision-making._
+Do not commit `.env.local`, credentials, real health records, generated build output, or database dumps.
